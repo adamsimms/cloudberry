@@ -181,7 +181,7 @@ if __name__ == '__main__':
 
     gopro = GoProCtrl()
 
-    gopro.wake()
+#    gopro.wake()
     count_down(10)
 
     if get_config('general', 'take_photo', 'False').lower() == 'true':
@@ -204,4 +204,4 @@ if __name__ == '__main__':
             if pushed:
                 os.unlink(f)
 
-    gopro.sleep()
+#    gopro.sleep()

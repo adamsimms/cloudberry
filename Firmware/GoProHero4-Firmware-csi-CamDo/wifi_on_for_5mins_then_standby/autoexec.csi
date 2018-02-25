@@ -1,0 +1,18 @@
+######################
+#    Turn WiFi on    #
+######################
+
+#initial wait period to avoid running script when taking time lapse images
+sleep 50
+
+# Start delay
+sleep 2
+
+# Turn On WiFi
+wifi on
+
+#amount of time for WiFi to remain active (in seconds - 5 minutes)
+sleep 300
+
+# Turn camera off and put Wifi on standby
+standby

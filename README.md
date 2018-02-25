@@ -21,21 +21,21 @@ Before executing, please make sure that the Raspberry Pi is connected to the GoP
 
 ### www.dataplicity.com
 
-*Username*: shutterislandpi@gmail.com
-*Password*: C10ud63rry
+- **Username**: shutterislandpi@gmail.com
+- **Password**: C10ud63rry
 
 ---
 
 ### www.remot3.it
 
-*Username*: adamsimms@gmail.com
-*Password*: C10ud63rry
+- **Username**: adamsimms@gmail.com
+- **Password**: C10ud63rry
 
 ---
 
 ### GoPro
-*SSID*: DiscoPro
-*Password: 5143478255
+- **SSID**: DiscoPro
+- **Password**: 5143478255
 
 Navigate via USB: `gphoto2://[usb:001,012]/DCIM/100GOPRO`
 
@@ -54,10 +54,10 @@ Device Info:
 
 ### HUAWEI LTE E8372
 
-    http://192.168.8.1
+http://192.168.8.1
 
-*Username*: admin
-*Password*: C10u63rry
+- **Username**: admin
+- **Password**: C10u63rry
 
 ---
 
@@ -65,8 +65,8 @@ Device Info:
 
 http://192.168.1.1
 
-*SSID*: CamDoBlink_F8F005F4EDC1
-*Password*: shutterisland
+- **SSID**: CamDoBlink_F8F005F4EDC1
+- **Password**: shutterisland
 
 ---
 
@@ -97,8 +97,8 @@ Start VNC:
 
 ### CameraSuite
 
-*Email*: angeal.gabereau@gmail.com
-*Serial Number*: 7980026B9E8D0202
+- **Email**: angeal.gabereau@gmail.com
+- **Serial Number**: 7980026B9E8D0202
 
 Install:
 

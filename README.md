@@ -85,7 +85,7 @@ Install:
 
 Run:
 
-  cd ~/wittyPi && sudo ./wittyPi.sh
+    cd ~/wittyPi && sudo ./wittyPi.sh
 
 ---
 
@@ -97,7 +97,7 @@ https://www.raspberrypi.org/documentation/remote-access/vnc/
 
 Start VNC:
 
-  sudo systemctl stop vncserver-x11-serviced.service && sudo systemctl start vncserver-x11-serviced.service && vncserver
+    sudo systemctl stop vncserver-x11-serviced.service && sudo systemctl start vncserver-x11-serviced.service && vncserver
 
 ---
 
@@ -109,23 +109,24 @@ Serial Number: `7980026B9E8D0202`
 
 Install:
 
-  sudo apt-get update
-  sudo apt-get upgrade
+    sudo apt-get update
+    sudo apt-get upgrade
   
-  sudo apt-get install openssl sqlite libts-0.0 libinput5 libgles2-mesa libstdc++$
-  libc6 libegl1-mesa libegl1-mesa-drivers libexpat1 libz1 libpng12-0 libevdev2 li$
-  libxdmcp6 libxau6 libfreetype6 libfontconfig1 libmtdev1 libudev1 libxkbcommon0 $
-  libx11-6 libx11-xcb1 libxext6 libts-0.0-0 libxcb1 libdbus-1.3
-  
-  sudo apt-get install gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0
-  
-  mkdir ~/camerasuite && cd ~/camerasuite
-  
-  wget http://www.camerasuite.org/dl/camerasuitepi.tar.gz
-  tar xfv camerasuitepi.tar.gz
+    sudo apt-get install openssl sqlite libts-0.0 libinput5 libgles2-mesa libstdc++$
+    libc6 libegl1-mesa libegl1-mesa-drivers libexpat1 libz1 libpng12-0 libevdev2 li$
+    libxdmcp6 libxau6 libfreetype6 libfontconfig1 libmtdev1 libudev1 libxkbcommon0 $
+    libx11-6 libx11-xcb1 libxext6 libts-0.0-0 libxcb1 libdbus-1.3
+
+    sudo apt-get install gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0
+
+    mkdir ~/camerasuite && cd ~/camerasuite
+
+    wget http://www.camerasuite.org/dl/camerasuitepi.tar.gz
+    tar xfv camerasuitepi.tar.gz
 
 Run:
-  cd camerasuite && ./camerasuite.sh -platform xcb
+    
+    cd camerasuite && ./camerasuite.sh -platform xcb
 
 ---
 
@@ -133,23 +134,24 @@ Run:
 
 List wlan0 status:
 
-  iwconfig
+    iwconfig
 
 Scan available WiFi Networks:
 
-  sudo iwlist wlan0 scan
-  sudo wpa_cli
+    sudo iwlist wlan0 scan
+    sudo wpa_cli
 
 Wifi up and down:
 
-  sudo ifconfig wlan0 up
-  sudo ifconfig wlan0 down
+    sudo ifconfig wlan0 up
+    sudo ifconfig wlan0 down
 
 Edit and reconfigure wpa_supplicant.conf:
 
-  sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-  sudo wpa_cli -i wlan0 reconfigure
+    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+    sudo wpa_cli -i wlan0 reconfigure
 
 What's going on with wpa_supplicatant:
-  sudo wpa_supplicant -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf -d
-  ps aux | grep wpa_supplicant
+    
+    sudo wpa_supplicant -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf -d
+    ps aux | grep wpa_supplicant

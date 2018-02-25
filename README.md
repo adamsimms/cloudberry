@@ -19,21 +19,22 @@ Before executing, please make sure that the Raspberry Pi is connected to the GoP
 
 ---
 
-### www.dataplicity.com
+## AWS
+- **Bucket:** shutter-island
+- **Key:** AKIAINXBPMZES7BVO7GA
+- **Secret:** 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
+
+## www.dataplicity.com
 
 - **Username**: shutterislandpi@gmail.com
 - **Password**: C10ud63rry
 
----
-
-### www.remot3.it
+## www.remot3.it
 
 - **Username**: adamsimms@gmail.com
 - **Password**: C10ud63rry
 
----
-
-### GoPro
+## GoPro
 - **SSID**: DiscoPro
 - **Password**: 5143478255
 
@@ -50,27 +51,21 @@ Device Info:
     "camera type":"HERO4 Black",
     "camera serial number":"C3121125863006",
 
----
-
-### HUAWEI LTE E8372
+## HUAWEI LTE E8372
 
 http://192.168.8.1
 
 - **Username**: admin
 - **Password**: C10u63rry
 
----
-
-### CamDo
+## CamDo
 
 http://192.168.1.1
 
 - **SSID**: CamDoBlink_F8F005F4EDC1
 - **Password**: shutterisland
 
----
-
-### WittyPi2
+## WittyPi2
 
 Install:
 
@@ -81,9 +76,7 @@ Run:
 
     cd ~/wittyPi && sudo ./wittyPi.sh
 
----
-
-### Real VNC
+## Real VNC
 
 https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-setup
 https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-connect-cloud
@@ -93,9 +86,7 @@ Start VNC:
 
     sudo systemctl stop vncserver-x11-serviced.service && sudo systemctl start vncserver-x11-serviced.service && vncserver
 
----
-
-### CameraSuite
+## CameraSuite
 
 - **Email**: angeal.gabereau@gmail.com
 - **Serial Number**: 7980026B9E8D0202
@@ -121,9 +112,7 @@ Run:
     
     cd camerasuite && ./camerasuite.sh -platform xcb
 
----
-
-### WiFi Scribbles
+## WiFi Scribbles
 
 List wlan0 status:
 

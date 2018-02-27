@@ -78,13 +78,14 @@ Run:
 
 ## Real VNC
 
-https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-setup
-https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-connect-cloud
-https://www.raspberrypi.org/documentation/remote-access/vnc/
+- https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-setup
+- https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-connect-cloud
+- https://www.raspberrypi.org/documentation/remote-access/vnc/
 
 Start VNC:
 
-    sudo systemctl stop vncserver-x11-serviced.service && sudo systemctl start vncserver-x11-serviced.service && vncserver
+    sudo systemctl stop vncserver-x11-serviced.service 
+    sudo systemctl start vncserver-x11-serviced.service && vncserver
 
 ## CameraSuite
 

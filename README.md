@@ -35,7 +35,7 @@ Before executing, please make sure that the Raspberry Pi is connected to the GoP
 - **Password**: C10ud63rry
 
 ## GoPro
-- **SSID**: DiscoPro
+- **SSID**: IslandPro
 - **Password**: 5143478255
 
 Navigate via USB: `gphoto2://[usb:001,012]/DCIM/100GOPRO`

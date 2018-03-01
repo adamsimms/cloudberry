@@ -4,11 +4,10 @@ import logging.config
 import re
 import time
 import sys
-import datetime
 import settings
 import urls_H3
 import urls_H4
-from utils.common import count_down
+from utils.common import count_down, parse_media_page
 from utils.config_util import get_config
 import urllib2
 import boto
@@ -100,7 +99,7 @@ class GoProCtrl:
 
             url += "/" + dirs[-1]
             result = urllib2.urlopen(url, timeout=10).read()
-            pics = re.findall('href="(GOPR\d+\.JPG)"', result) + re.findall('href="(GOPR\d+\.MP4)"', result)
+            pics = parse_media_page(result)
         except urllib2.URLError as e:
             logger.error(e)
             return
@@ -110,9 +109,9 @@ class GoProCtrl:
             return
 
         def download_pic(_url, _pic):
-            _url += "/" + _pic
+            _url += "/" + _pic['name']
             _result = urllib2.urlopen(_url, timeout=10)
-            f_name = '{}.000Z_{}'.format(datetime.datetime.now().replace(microsecond=0).isoformat(), _pic)
+            f_name = '{}.000Z_{}'.format(pic['date'].isoformat(), _pic['name'])
             logger.info("Downloading %s (%s bytes)..." % (f_name, _result.headers['content-length']))
 
             download_file_name = os.path.join(image_path, f_name)

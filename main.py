@@ -111,7 +111,7 @@ class GoProCtrl:
         def download_pic(_url, _pic):
             _url += "/" + _pic['name']
             _result = urllib2.urlopen(_url, timeout=10)
-            f_name = '{}.000Z_{}'.format(pic['date'].isoformat(), _pic['name'])
+            f_name = '{}.000Z_{}'.format(_pic['date'].isoformat(), _pic['name'])
             logger.info("Downloading %s (%s bytes)..." % (f_name, _result.headers['content-length']))
 
             download_file_name = os.path.join(image_path, f_name)
@@ -122,7 +122,7 @@ class GoProCtrl:
                     if not chunk:
                         break
                     _f.write(chunk)
-                    print _f.tell(), "\r",
+                    print(_f.tell(), "\r")
                     sys.stdout.flush()
             return download_file_name
 

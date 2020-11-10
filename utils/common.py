@@ -6,10 +6,10 @@ import datetime
 
 def count_down(s):
     for i in range(s, 0, -1):
-        print i,
+        print(i)
         sys.stdout.flush()
         time.sleep(1)
-    print
+    print()
 
 
 def get_serial():

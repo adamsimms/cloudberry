@@ -4,6 +4,8 @@ import logging.config
 import re
 import time
 import sys
+from datetime import datetime
+
 import settings
 import urls_H3
 import urls_H4
@@ -110,7 +112,7 @@ class GoProCtrl:
         def download_pic(_url, _pic):
             _url += "/" + _pic['name']
             _result = urllib2.urlopen(_url, timeout=10)
-            f_name = '{}.000Z_{}'.format(_pic['date'].isoformat(), _pic['name'])
+            f_name = '{}.000Z_{}'.format(_pic.get('date', datetime.now()).isoformat(), _pic['name'])
             logger.info("Downloading %s (%s bytes)..." % (f_name, _result.headers['content-length']))
 
             download_file_name = os.path.join(image_path, f_name)

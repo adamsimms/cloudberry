@@ -44,6 +44,7 @@ class GoProCtrl:
     def wake(self):
         logger.info("Wake up GoPro...")
         if camera_type == "H4":
+            self.send_cmd(url_base.url_shutter_on)
             return send_magic_packet('D4:D9:19:9A:00:5A', ip_address=settings.GOPRO_IP, port=9)
         else:
             return self.send_cmd(url_base.url_gopro_on)

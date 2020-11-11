@@ -21,6 +21,7 @@ url_photo_res_5MP_med = "/gp/gpControl/setting/17/3"
 
 url_default_photo = "/gp/gpControl/setting/53/1"
 
+url_delete = "/gp/gpControl/command/storage/delete?p=/100GOPRO/{file}"
 url_delete_last = "/gp/gpControl/command/storage/delete/last"
 url_delete_all = "/gp/gpControl/command/storage/delete/all"
 

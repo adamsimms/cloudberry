@@ -1,3 +1,5 @@
+from settings import GOPRO_IP
+
 url_media = ":8080/videos/DCIM/"
 
 
@@ -23,4 +25,4 @@ url_delete_last = "/gp/gpControl/command/storage/delete/last"
 url_delete_all = "/gp/gpControl/command/storage/delete/all"
 
 url_filelist = "/gp/gpMediaList"
-url_filepath = "http://10.5.5.9:8080/videos/DCIM/100GOPRO/"
+url_filepath = "http://{}:8080/videos/DCIM/100GOPRO/".format(GOPRO_IP)

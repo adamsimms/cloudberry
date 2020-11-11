@@ -9,7 +9,7 @@ import urls_H3
 import urls_H4
 from utils.common import count_down, parse_media_page
 from utils.config_util import get_config
-from urllib.request import urlopen
+import urllib2
 import boto
 from boto.s3.key import Key
 import socket
@@ -56,7 +56,7 @@ class GoProCtrl:
         print("Sending command,   ", url)
 
         try:
-            urlopen(url, timeout=10).read()
+            urllib2.urlopen(url, timeout=10).read()
             return True
         except Exception as e:
             logger.error('Failed to send command to GoPro: {}'.format(e))
@@ -91,15 +91,15 @@ class GoProCtrl:
             logger.info("- download last one")
             url = settings.GOPRO_URL + settings.URL_MEDIA
 
-            result = urlopen(url, timeout=10).read()
+            result = urllib2.urlopen(url, timeout=10).read()
             dirs = re.findall('href="(\d\d\dGOPRO)/"', result)
             if not dirs:
                 logger.error("No Media Folders")
                 return
             url += "/" + dirs[-1]
-            result = urlopen(url, timeout=10).read()
+            result = urllib2.urlopen(url, timeout=10).read()
             pics = parse_media_page(result)
-        except Exception as e:
+        except urllib2.URLError as e:
             logger.error(e)
             return
 
@@ -109,7 +109,7 @@ class GoProCtrl:
 
         def download_pic(_url, _pic):
             _url += "/" + _pic['name']
-            _result = urlopen(_url, timeout=10)
+            _result = urllib2.urlopen(_url, timeout=10)
             f_name = '{}.000Z_{}'.format(_pic['date'].isoformat(), _pic['name'])
             logger.info("Downloading %s (%s bytes)..." % (f_name, _result.headers['content-length']))
 

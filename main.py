@@ -56,9 +56,9 @@ class GoProCtrl:
             url = settings.GOPRO_URL + cmd.format(get_config('gopro', 'password'))
 
         print("Sending command,   ", url)
-
         try:
-            urllib2.urlopen(url, timeout=10).read()
+            result = urllib2.urlopen(url, timeout=10).read()
+            logger.debug("Result from {} :: {}".format(url, result))
             return True
         except Exception as e:
             logger.error('Failed to send command to GoPro: {}'.format(e))
@@ -123,18 +123,21 @@ class GoProCtrl:
                     if not chunk:
                         break
                     _f.write(chunk)
-                    print(_f.tell(), "\r")
                     sys.stdout.flush()
-            return download_file_name
+            return download_file_name, _pic['name']
 
         if last:
             return download_pic(url, max(pics))
         else:
             return [download_pic(url, pic) for pic in pics]
 
-    def delete(self, last=True):
-        logger.info("- delete")
-        return self.send_cmd(url_base.url_delete_last if last else url_base.url_delete_all)
+    def delete(self, file_name):
+        logger.info("- delete {}".format(file_name))
+        return self.send_cmd(url_base.url_delete.format(file=file_name))
+
+    def delete_last(self):
+        logger.info("- delete last")
+        return self.send_cmd(url_base.url_delete_last)
 
 
 def push_picture_to_s3(_file_key, file_path):
@@ -194,14 +197,11 @@ if __name__ == '__main__':
 
         count_down(10)
 
-        gopro.delete_all()
-
-        count_down(10)
-
-        for f in p_file_names:
+        for f, name in p_file_names:
             file_key = os.path.basename(f)
             pushed = push_picture_to_s3(_file_key=file_key, file_path=f)
             if pushed:
                 os.unlink(f)
+                gopro.delete(file_name=name)
 
 #    gopro.sleep()

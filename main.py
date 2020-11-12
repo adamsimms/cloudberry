@@ -192,7 +192,7 @@ if __name__ == '__main__':
             # Camera warm-up time
             time.sleep(2)
             camera.capture(os.path.join(image_path, img_name))
-        file_names = [img_name]
+        file_names = [(img_name, None)]
         gopro = None
     else:
         gopro = GoProCtrl()

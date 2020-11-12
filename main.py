@@ -204,12 +204,10 @@ if __name__ == '__main__':
             gopro.takepic()
             count_down(10)
         file_names = gopro.download(last=False)
-
-    if file_names:
         logger.info('Downloaded {} file(s)'.format(len(file_names)))
-
         count_down(10)
 
+    if file_names:
         for f, name in file_names:
             file_key = os.path.basename(f)
             pushed = push_picture_to_s3(_file_key=file_key, file_path=f)

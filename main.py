@@ -187,12 +187,13 @@ if __name__ == '__main__':
     if camera_type == 'picamera':
         img_name = '{}.000Z_PiCamera.jpg'.format(datetime.now().isoformat())
         logger.debug("Taking picture from PiCamera - {}".format(img_name))
+        full_path = os.path.join(image_path, img_name)
         with picamera.PiCamera() as camera:
             camera.resolution = (1024, 768)
             # Camera warm-up time
             time.sleep(2)
-            camera.capture(os.path.join(image_path, img_name))
-        file_names = [(img_name, None)]
+            camera.capture(full_path)
+        file_names = [(full_path, None)]
         gopro = None
     else:
         gopro = GoProCtrl()

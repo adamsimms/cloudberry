@@ -14,6 +14,7 @@ from utils.config_util import get_config
 import urllib2
 import boto
 from boto.s3.key import Key
+import picamera
 import socket
 
 cur_dir = os.path.dirname(os.path.realpath(__file__)) + '/'
@@ -183,26 +184,36 @@ if __name__ == '__main__':
             logger.info('Pushed remaining image({}) to S3, removing...'.format(img))
             os.unlink(img)
 
-    gopro = GoProCtrl()
-
-#    gopro.wake()
-    count_down(10)
-
-    if get_config('general', 'take_photo', 'False').lower() == 'true':
-        gopro.takepic()
+    if camera_type == 'picamera':
+        img_name = '{}.000Z_PiCamera.jpg'.format(datetime.now().isoformat())
+        logger.debug("Taking picture from PiCamera - {}".format(img_name))
+        with picamera.PiCamera() as camera:
+            camera.resolution = (1024, 768)
+            # Camera warm-up time
+            time.sleep(2)
+            camera.capture(os.path.join(image_path, img_name))
+        file_names = [img_name]
+        gopro = None
+    else:
+        gopro = GoProCtrl()
+        gopro.wake()
         count_down(10)
 
-    p_file_names = gopro.download(last=False)
-    if p_file_names:
-        logger.info('Downloaded {} file(s)'.format(len(p_file_names)))
+        if get_config('general', 'take_photo', 'False').lower() == 'true':
+            gopro.takepic()
+            count_down(10)
+        file_names = gopro.download(last=False)
+
+    if file_names:
+        logger.info('Downloaded {} file(s)'.format(len(file_names)))
 
         count_down(10)
 
-        for f, name in p_file_names:
+        for f, name in file_names:
             file_key = os.path.basename(f)
             pushed = push_picture_to_s3(_file_key=file_key, file_path=f)
             if pushed:
                 os.unlink(f)
-                gopro.delete(file_name=name)
-
-#    gopro.sleep()
+                if camera_type != 'picamera':
+                    gopro.delete(file_name=name)
+                    # gopro.sleep()

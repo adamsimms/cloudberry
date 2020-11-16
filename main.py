@@ -57,7 +57,7 @@ class GoProCtrl:
         else:
             url = settings.GOPRO_URL + cmd.format(get_config('gopro', 'password'))
 
-        print("Sending command,   ", url)
+        print("Sending command: ".format(url))
         try:
             result = urllib2.urlopen(url, timeout=10).read()
             logger.debug("Result from {} :: {}".format(url, result))

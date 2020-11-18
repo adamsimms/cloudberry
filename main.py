@@ -215,4 +215,6 @@ if __name__ == '__main__':
                 os.unlink(f)
                 if camera_type != 'picamera':
                     gopro.delete(file_name=name)
-                    # gopro.sleep()
+
+    if camera_type != 'picamera':
+        gopro.sleep()

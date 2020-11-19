@@ -56,7 +56,10 @@ Device Info:
 http://192.168.8.1
 
 - **Username**: admin
-- **Password**: C10u63rry
+- **Password**: REDACTED_GOPRO_PASSWORD
+
+- **SSID**: echoberry
+- **Password**: REDACTED_GOPRO_PASSWORD
 
 ## CamDo
 

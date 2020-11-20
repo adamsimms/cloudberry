@@ -56,7 +56,10 @@ Device Info:
 http://192.168.8.1
 
 - **Username**: admin
-- **Password**: C10u63rry
+- **Password**: 7096572120
+
+- **SSID**: echoberry
+- **Password**: 7096572120
 
 ## CamDo
 

@@ -43,9 +43,8 @@ class GoProCtrl:
         pass
 
     def wake(self):
-        logger.info("Wake up GoPro...")
+        logger.info("Waking up the camera...")
         if camera_type == "H4":
-            self.send_cmd(url_base.url_shutter_on)
             return send_magic_packet('D4:D9:19:9A:00:5A', ip_address=settings.GOPRO_IP, port=9)
         else:
             return self.send_cmd(url_base.url_gopro_on)
@@ -63,28 +62,29 @@ class GoProCtrl:
             logger.debug("Result from {} :: {}".format(url, result))
             return True
         except Exception as e:
-            logger.error('Failed to send command to GoPro: {}'.format(e))
+            logger.error('Failed to send command to camera: {}'.format(e))
 
     def sleep(self):
-        logger.info("- Sleep")
+        logger.info("Putting the camera to sleep...")
         return self.send_cmd(url_base.url_gopro_off)
 
     def delete_all(self):
-        logger.info("- Deleting all")
+        logger.info("Delete all photos...")
         return self.send_cmd(url_base.url_delete_all)
 
     def takepic(self):
-        logger.info("- take a photo")
+        logger.info("Setting camera to photo mode...")
         if not self.send_cmd(url_base.url_mode_photo):
             return False
         count_down(5)  # wait for photo mode to turn on
+        logger.info("Taking photo...")
         if not self.send_cmd(url_base.url_shutter_on):
             return False
-        count_down(1)  # wait for photo to be taken
+        count_down(5)  # wait for photo to be taken
         return True
 
     def set_date_time(self):
-        logger.info("setting date and time...")
+        logger.info("Setting date and time...")
         s = time.strftime("%y%%%m%%%d%%%H%%%M%%%S", time.localtime())
         url = url_base.url_set_date_time + s
         return self.send_cmd(url)
@@ -92,7 +92,7 @@ class GoProCtrl:
     @staticmethod
     def download(last=True):
         try:
-            logger.info("- download last one")
+            logger.info("Downloading photos...")
             url = settings.GOPRO_URL + settings.URL_MEDIA
 
             result = urllib2.urlopen(url, timeout=10).read()
@@ -108,7 +108,7 @@ class GoProCtrl:
             return
 
         if not pics:
-            logger.error("No Pictures")
+            logger.error("No Photos")
             return
 
         def download_pic(_url, _pic):
@@ -134,7 +134,7 @@ class GoProCtrl:
             return [download_pic(url, pic) for pic in pics]
 
     def delete(self, file_name):
-        logger.info("- delete {}".format(file_name))
+        logger.info("Deleting {}".format(file_name))
         return self.send_cmd(url_base.url_delete.format(file=file_name))
 
     def delete_last(self):
@@ -148,7 +148,7 @@ def push_picture_to_s3(_file_key, file_path):
         conn = boto.connect_s3(aws_key, aws_security)
         bucket = conn.get_bucket(aws_bucket)
 
-        msg = "Uploading to AWS.. Key: " + _file_key + "  Path: " + file_path
+        msg = "Uploading to AWS... Key: " + _file_key + "  Path: " + file_path
         logger.info(msg)
 
         k = Key(bucket)
@@ -157,7 +157,7 @@ def push_picture_to_s3(_file_key, file_path):
         # we need to make it public so it can be accessed publicly
         # using a URL like http://s3.amazonaws.com/bucket_name/key
         k.make_public()
-        logger.info("Succeeded to upload to AWS S3...")
+        logger.info("Uploaded to AWS...")
         return True
 
     except ValueError as e:
@@ -170,23 +170,23 @@ def push_picture_to_s3(_file_key, file_path):
 
 if __name__ == '__main__':
 
-    logger.debug('========== Starting GoPro {} Controller =========='.format(camera_type))
+    logger.debug('========== Starting {} Controller =========='.format(camera_type))
 
     delay = int(get_config('general', 'delay', 5))
-    logger.debug('Sleeping for {} minutes'.format(delay))
-    count_down(delay * 60)
+    logger.debug("Sleeping for 1 minute.")
+    count_down(60)
 
     # Upload remaining image files
     for img in glob.glob(os.path.join(image_path, '*.JPG')):
         file_key = os.path.basename(img)
         pushed = push_picture_to_s3(_file_key=file_key, file_path=img)
         if pushed:
-            logger.info('Pushed remaining image({}) to S3, removing...'.format(img))
+            logger.info('Pushing remaining image({}) to AWS...'.format(img))
             os.unlink(img)
 
     if camera_type == 'picamera':
         img_name = '{}.000Z_PiCamera.jpg'.format(datetime.now().isoformat())
-        logger.debug("Taking picture from PiCamera - {}".format(img_name))
+        logger.debug("Taking photo  from PiCamera - {}".format(img_name))
         full_path = os.path.join(image_path, img_name)
         with picamera.PiCamera() as camera:
             camera.resolution = (1024, 768)
@@ -202,10 +202,9 @@ if __name__ == '__main__':
 
         if get_config('general', 'take_photo', 'False').lower() == 'true':
             gopro.takepic()
-            count_down(10)
         file_names = gopro.download(last=False)
         logger.info('Downloaded {} file(s)'.format(len(file_names)))
-        count_down(10)
+	count_down(5)
 
     if file_names:
         for f, name in file_names:
@@ -217,4 +216,6 @@ if __name__ == '__main__':
                     gopro.delete(file_name=name)
 
     if camera_type != 'picamera':
-        gopro.sleep()
+        count_down(10)
+	gopro.sleep()
+	count_down(5)

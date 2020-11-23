@@ -10,7 +10,7 @@ import settings
 import urls_H3
 import urls_H4
 from utils.common import count_down, parse_media_page
-from utils.config_util import get_config
+from utils.config_util import get_config, get_section_config
 import urllib2
 import boto
 from boto.s3.key import Key
@@ -189,7 +189,16 @@ if __name__ == '__main__':
         logger.debug("Taking picture from PiCamera - {}".format(img_name))
         full_path = os.path.join(image_path, img_name)
         with picamera.PiCamera() as camera:
-            camera.resolution = (1024, 768)
+            for k, v in get_section_config('picamera').items():
+                try:
+                    v = int(v)
+                except ValueError:
+                    pass
+                try:
+                    logger.debug("Setting PiCamera parameter: {} => {}".format(k, v))
+                    setattr(camera, k, v)
+                except Exception as e:
+                    logger.error("Failed to set PiCamera parameter: {} => {}".format(k, v))
             # Camera warm-up time
             time.sleep(2)
             camera.capture(full_path)

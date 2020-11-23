@@ -173,8 +173,8 @@ if __name__ == '__main__':
     logger.debug('========== Starting {} Controller =========='.format(camera_type))
 
     delay = int(get_config('general', 'delay', 5))
-    logger.debug("Sleeping for 1 minute.")
-    count_down(60)
+    logger.debug("Sleeping for {} minute(s)".format(delay))
+    count_down(delay * 60)
 
     # Upload remaining image files
     for img in glob.glob(os.path.join(image_path, '*.JPG')):
@@ -189,16 +189,16 @@ if __name__ == '__main__':
         logger.debug("Taking photo  from PiCamera - {}".format(img_name))
         full_path = os.path.join(image_path, img_name)
         with picamera.PiCamera() as camera:
-            for k, v in get_section_config('picamera').items():
+            for pk, v in get_section_config('picamera').items():
                 try:
                     v = int(v)
                 except ValueError:
                     pass
                 try:
-                    logger.debug("Setting PiCamera parameter: {} => {}".format(k, v))
-                    setattr(camera, k, v)
-                except Exception as e:
-                    logger.error("Failed to set PiCamera parameter: {} => {}".format(k, v))
+                    logger.debug("Setting PiCamera parameter: {} => {}".format(pk, v))
+                    setattr(camera, pk, v)
+                except Exception as er:
+                    logger.error("Failed to set PiCamera parameter: {} => {}, {}".format(pk, v, er))
             # Camera warm-up time
             time.sleep(2)
             camera.capture(full_path)
@@ -213,7 +213,7 @@ if __name__ == '__main__':
             gopro.takepic()
         file_names = gopro.download(last=False)
         logger.info('Downloaded {} file(s)'.format(len(file_names)))
-	count_down(5)
+    count_down(5)
 
     if file_names:
         for f, name in file_names:
@@ -226,5 +226,5 @@ if __name__ == '__main__':
 
     if camera_type != 'picamera':
         count_down(10)
-	gopro.sleep()
-	count_down(5)
+    gopro.sleep()
+    count_down(5)

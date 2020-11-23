@@ -226,5 +226,5 @@ if __name__ == '__main__':
 
     if camera_type != 'picamera':
         count_down(10)
-    gopro.sleep()
+        gopro.sleep()
     count_down(5)

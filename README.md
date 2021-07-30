@@ -17,56 +17,11 @@ Before executing, please make sure that the Raspberry Pi is connected to the GoP
     sudo cp gopro.sh /etc/network/if-up.d/
     sudo chmod 755 /etc/network/if-up.d/gopro.sh
 
----
-
-## AWS
-- **Bucket:** shutter-island
-- **Key:** AKIAINXBPMZES7BVO7GA
-- **Secret:** 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
-
-## www.dataplicity.com
-
-- **Username**: shutterislandpi@gmail.com
-- **Password**: C10ud63rry
-
-## www.remot3.it
-
-- **Username**: adamsimms@gmail.com
-- **Password**: C10ud63rry
-
 ## GoPro
-- **SSID**: IslandPro
-- **Password**: 5143478255
-
 Navigate via USB: `gphoto2://[usb:001,012]/DCIM/100GOPRO`
 
 GoPro4 Wifi Commands, with pairing instruction: 
     https://github.com/KonradIT/goprowifihack/blob/master/HERO4/WifiCommands.md
-
-Device Info:
-
-    "info version":"2.0",
-    "firmware version":"HD4.02.05.00.00",
-    "wifi mac":"d4d9199a005a",
-    "camera type":"HERO4 Black",
-    "camera serial number":"C3121125863006",
-
-## HUAWEI LTE E8372
-
-http://192.168.8.1
-
-- **Username**: admin
-- **Password**: 7096572120
-
-- **SSID**: echoberry
-- **Password**: 7096572120
-
-## CamDo
-
-http://192.168.1.1
-
-- **SSID**: CamDoBlink_F8F005F4EDC1
-- **Password**: shutterisland
 
 ## WittyPi2
 
@@ -91,9 +46,6 @@ Start VNC:
     sudo systemctl start vncserver-x11-serviced.service && vncserver
 
 ## CameraSuite
-
-- **Email**: angeal.gabereau@gmail.com
-- **Serial Number**: 7980026B9E8D0202
 
 Install:
 

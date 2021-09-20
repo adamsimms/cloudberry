@@ -1,3 +1,5 @@
 .idea/
 images/
 note.txt
+*.secret
+*.DS_store

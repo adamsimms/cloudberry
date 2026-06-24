@@ -1,5 +1,22 @@
 # GoPro Camera Controller
+
+Raspberry Pi software for Pinchard's Island — captures GoPro photos, uploads to S3, displayed at [www.pinchards.is](http://www.pinchards.is).
+
 _Supports H3 and H4_
+
+> **Note:** This repo supersedes the legacy private [shutter-island](https://github.com/adamsimms/shutter-island) Node.js experiments. Hardware docs, Witty Pi schedules, and archived Node scripts were merged from shutter-island in 2026. See `archive/shutter-island-node/` for the old code.
+
+## Repo layout
+
+| Path | Purpose |
+|------|---------|
+| `main.py`, `config.ini`, `utils/` | Python GoPro controller (run on the Pi) |
+| `Firmware/` | GoPro HERO4 official + CamDo CSI firmware and `autoexec.csi` scripts |
+| `Documentation/` | Field guides (Witty Pi, INA219, watchdog, setup log) |
+| `examples/wittypi/` | Witty Pi 2 schedule scripts (`.wpi`), including `shutterisland.wpi` |
+| `libraries/` | `installWittyPi.sh`, Low-Power library zip |
+| `script/` | `gopro.sh` auto-start, ffmpeg install |
+| `archive/shutter-island-node/` | Legacy Node.js rig code (reference only) |
 
 ## Install dependencies
 
@@ -33,6 +50,8 @@ Install:
 Run:
 
     cd ~/wittyPi && sudo ./wittyPi.sh
+
+Schedule examples (including the island capture schedule) are in `examples/wittypi/`. Copy a `.wpi` file to `~/wittyPi/schedule.wpi` and run `sudo ./runScript`, or select one when running `wittyPi.sh`. See `examples/wittypi/README` for format details.
 
 ## Real VNC
 

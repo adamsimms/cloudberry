@@ -1,0 +1,43 @@
+# Turn on Raspberry Pi at 5:00, then turn it on every hour, for 15 minutes
+
+# Turn on again at 21:00, turn it off at 21:30
+# Repeat above everyday
+
+BEGIN	2015-08-01 05:00:00	# starts at 5:00
+END	2025-07-31 23:59:59
+ON	M15		# keep ON state for 15 minutes (until 5:15)
+OFF	M45		# keep OFF state for 45 minutes (until 6:00am)
+ON	M15		# keep ON state for 15 minutes (until 6:15)
+OFF	M45		# keep OFF state for 45 minutes (until 7:00am)
+ON	M15		# keep ON state for 15 minutes (until 7:15)
+OFF	M45		# keep OFF state for 45 minutes (until 8:00am)
+ON	M15		# keep ON state for 15 minutes (until 8:15)
+OFF	M45		# keep OFF state for 45 minutes (until 9:00am)
+ON	M15		# keep ON state for 15 minutes (until 9:15)
+OFF	M45		# keep OFF state for 45 minutes (until 10:00am)
+ON	M15		# keep ON state for 15 minutes (until 10:15)
+OFF	M45		# keep OFF state for 45 minutes (until 11:00am)
+ON	M15		# keep ON state for 15 minutes (until 11:15)
+OFF	M45		# keep OFF state for 45 minutes (until 12:00am)
+ON	M55		# keep ON state for 55 minutes (until 12:55)
+OFF	M5		# keep OFF state for 5 minutes (until 1:00pm)
+ON	M15		# keep ON state for 15 minutes (until 1:15)
+OFF	M45		# keep OFF state for 45 minutes (until 2:00pm)
+ON	M15		# keep ON state for 15 minutes (until 2:15)
+OFF	M45		# keep OFF state for 45 minutes (until 3:00pm)
+ON	M15		# keep ON state for 15 minutes (until 3:15)
+OFF	M45		# keep OFF state for 45 minutes (until 4:00pm)
+ON	M15		# keep ON state for 15 minutes (until 4:15)
+OFF	M45		# keep OFF state for 45 minutes (until 5:00pm)
+ON	M15		# keep ON state for 15 minutes (until 5:15)
+OFF	M45		# keep OFF state for 45 minutes (until 6:00pm)
+ON	M15		# keep ON state for 15 minutes (until 6:15)
+OFF	M45		# keep OFF state for 45 minutes (until 7:00pm)
+ON	M15		# keep ON state for 15 minutes (until 7:15)
+OFF	M45		# keep OFF state for 45 minutes (until 8:00pm)
+ON	M15		# keep ON state for 15 minutes (until 8:15)
+OFF	M45		# keep OFF state for 45 minutes (until 9:00pm)
+ON	M15		# keep ON state for 15 minutes (until 9:15)
+OFF	M45		# keep OFF state for 45 minutes (until 10:00pm)
+ON	M60		# keep ON state for 60 minutes (until 11:00)
+OFF	H6		# keep OFF state for 6H (until 5:00am)

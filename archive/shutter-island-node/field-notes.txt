@@ -1,0 +1,95 @@
+/usr/local/bin/node --harmony /home/pi/ShutterIsland/repo/shutter-island/tests/cloudpistill/snapshot.js
+/usr/local/bin/node /home/pi/ShutterIsland/repo/shutter-island/cloudberry/download.js
+
+/etc/init.d/
+
+GoPro4 Wifi Commands, with pairing instruction
+-----------------------------------------------
+https://github.com/KonradIT/goprowifihack/blob/master/HERO4/WifiCommands.md
+
+General Reference
+-----------------
+http://www.codingpedia.org/ama/how-to-test-a-rest-api-from-command-line-with-curl/
+
+Real VNC
+--------
+https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-setup
+https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-connect-cloud
+https://www.raspberrypi.org/documentation/remote-access/vnc/
+
+Start/stop VNC Server
+sudo systemctl stop vncserver-x11-serviced.service
+sudo systemctl start vncserver-x11-serviced.service
+
+Potential Point of Failure
+---------------------------
+Witty Pi 2 battery dies
+- rechargeable battery would be preferred.  There is an option to charge through a pin on the Witty Pi
+- Witty Pi 2 Locking up.  Caused by shutting down the pi manually, with a scheduled shutdown:
+http://www.uugear.com/portfolio/use-schedule-script-to-control-your-witty-pi/
+"If you are using schedule script, please do not turn off your Raspberry Pi manually, and just let the scheduled shutdown comes. Otherwise your Witty Pi may enter a dead lock status and you will need to rest it then (remove battery and power supply)."
+- GoPro - Raspberry Pi wifi range.
+Initial test demostrated that the range is very short.  Could be caused by interferrence in my studio.  I'll need to do further tests, and look into busting the range.
+- GoPro pairing
+In theory it should be stable.  Initial test demostrated persistant pairing between gopro and pi on restart of both.  However, there was some issue when the gopro went out of wifi range.  Further testing needed.
+
+INA219
+------
+https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring
+
+
+https://www.maximintegrated.com/en/app-notes/index.mvp/id/279
+
+http://www.ti.com/lit/ds/symlink/lm3724.pdf
+
+HERO4 - CSI GO PRO Firmware update.
+https://www.dropbox.com/sh/p2dk2vsnb0w0wfx/AAAaLy0T449WXu4ex_h4iBnJa
+
+Turn wifi on when camera is on, download link:
+https://www.dropbox.com/s/bmnfi8688w29tpx/autoexec.csi?dl=0
+
+Turn on WiFi when camera is powered on and maintain WiFi connection after exiting USB mode:
+https://www.dropbox.com/s/dty16vy1b3vcm1b/autoexec.csi?dl=0
+
+30 min wifi on
+https://www.dropbox.com/s/z0e4ezpczu1uqor/autoexec.csi?dl=0
+
+Enable rest connect 
+https://www.dropbox.com/s/zxuz5zc5u1vc3ri/autoexec.csi?dl=0
+
+
+Command to turn off hdmi
+Switch off
+
+/opt/vc/bin/tvservice -o 
+Switch on
+
+/opt/vc/bin/tvservice -p
+
+sudo vcgencmd display_power 0
+sudo vcgencmd display_power 1
+
+Contents f verison.txt on gopro sd card:
+{
+"info version":"2.0",
+"firmware version":"HD4.02.05.00.00",
+"wifi mac":"d4d9199a005a",
+"camera type":"HERO4 Black",
+"camera serial number":"C3121125863006",
+}
+
+RPi Compatiable cards
+---------------------
+http://elinux.org/RPi_SD_cards
+
+
+
+WiFi
+------
+
+pi@raspberrypi ~/wittyPi $ sudo ./wittyPi.sh 
+
+A schedule script (.wpi file) defines a loop, with all states and their durations inside. By automatically running “runScript.sh” after booting, Witty Pi 2 will automatically schedule the next shutdown and next startup for you, and hence a complex ON/OFF sequence could be achieved. 
+
+If you want to confirm what the script is doing, you can check the “schedule.log” file in the “~/wittyPi” directory, when your Raspberry Pi is on.
+

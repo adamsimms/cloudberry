@@ -1,0 +1,14 @@
+{
+  "name": "cloudpistill",
+  "version": "1.0.0",
+  "description": "Take a pi with raspistill node",
+  "main": "snapshot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-raspistill": "0.0.12"
+  }
+}

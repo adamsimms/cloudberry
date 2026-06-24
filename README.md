@@ -4,7 +4,7 @@ Raspberry Pi software for Pinchard's Island — captures GoPro photos, uploads t
 
 _Supports H3 and H4_
 
-> **Note:** This repo supersedes the legacy private [shutter-island](https://github.com/adamsimms/shutter-island) Node.js experiments. Hardware docs, Witty Pi schedules, and archived Node scripts were merged from shutter-island in 2026. See `archive/shutter-island-node/` for the old code.
+> **Note:** This repo supersedes the legacy private [shutter-island](https://github.com/adamsimms/shutter-island) Node.js experiments. Hardware docs, Witty Pi schedules, and archived Node scripts were merged from shutter-island in 2026. See `archive/shutter-island/` for rig code and field tests.
 
 ## Repo layout
 
@@ -16,7 +16,7 @@ _Supports H3 and H4_
 | `examples/wittypi/` | Witty Pi 2 schedule scripts (`.wpi`), including `shutterisland.wpi` |
 | `libraries/` | `installWittyPi.sh`, Low-Power library zip |
 | `script/` | `gopro.sh` auto-start, ffmpeg install |
-| `archive/shutter-island-node/` | Legacy Node.js rig code (reference only) |
+| `archive/shutter-island/` | Legacy Node.js rig code + field tests (2017 history) |
 
 ## Install dependencies
 

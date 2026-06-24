@@ -3,3 +3,8 @@ images/
 note.txt
 *.secret
 *.DS_store
+secrets.env
+.env
+.env.local
+cloudberry.ini
+~/cloudberry.ini

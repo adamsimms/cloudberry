@@ -11,6 +11,7 @@ import urls_H3
 import urls_H4
 from utils.common import count_down, parse_media_page
 from utils.config_util import get_config, get_section_config
+from utils.secrets import aws_credentials, gopro_wifi_password, load_secrets
 import urllib2
 import boto
 from boto.s3.key import Key
@@ -19,13 +20,14 @@ import socket
 
 cur_dir = os.path.dirname(os.path.realpath(__file__)) + '/'
 
+load_secrets()
+
 logging.config.fileConfig(os.path.join(cur_dir, 'logging.ini'))
 logger = logging.getLogger('GoPro')
 
 
-aws_bucket = get_config('aws', 'bucket')
-aws_key = get_config('aws', 'KEY')
-aws_security = get_config('aws', 'SECRET')
+aws_key, aws_security, aws_bucket = aws_credentials()
+gopro_password = gopro_wifi_password()
 
 
 image_path = os.path.join(cur_dir, 'images')
@@ -54,7 +56,7 @@ class GoProCtrl:
         if camera_type == "H4":
             url = settings.GOPRO_URL + cmd
         else:
-            url = settings.GOPRO_URL + cmd.format(get_config('gopro', 'password'))
+            url = settings.GOPRO_URL + cmd.format(gopro_password)
 
         print("Sending command: ".format(url))
         try:

@@ -18,6 +18,18 @@ _Supports H3 and H4_
 | `script/` | `gopro.sh` auto-start, ffmpeg install |
 | `archive/shutter-island/` | Legacy Node.js rig code + field tests (2017 history) |
 
+## Secrets (never commit)
+
+AWS keys, GoPro Wi‑Fi password, and other credentials live in **`secrets.env`** (gitignored), not in `config.ini`.
+
+1. Copy the template: `cp .env.example secrets.env`
+2. Fill in values (keep a backup in your password manager)
+3. On the Pi you can also use `~/.cloudberry/secrets.env`
+
+`main.py` loads `secrets.env` automatically via `utils/secrets.py`. Required variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET`, `GOPRO_WIFI_PASSWORD`.
+
+**If you ever had AWS keys in an old `config.ini`:** rotate them in IAM — purging git history does not invalidate exposed keys.
+
 ## Install dependencies
 
     cd cloudberry

@@ -7,7 +7,7 @@ Each folder is a separate experiment from the shutter-island era. None of this r
 **Pi Camera Module** via `node-raspistill` — could the island use the Pi's own camera instead of (or alongside) the GoPro?
 
 - `snapshot.js` — take a still
-- `hi.jpg`, `photos/` — actual outputs from the Pi cam, summer 2017
+- [`captures/`](cloudpistill/captures/) — actual outputs from the Pi cam, summer 2017, sorted by date
 
 ```bash
 cd cloudpistill && npm install && node snapshot.js

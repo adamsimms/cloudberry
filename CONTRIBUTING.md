@@ -5,9 +5,8 @@ Thanks for your interest in contributing. Cloudberry is the Pinchard's Island fi
 ## Before you start
 
 1. Read the [README](README.md) for the boot-once workflow and repo layout.
-2. Review the [Code of Conduct](CODE_OF_CONDUCT.md).
-3. Check [open issues](https://github.com/adamsimms/cloudberry/issues) and [open PRs](https://github.com/adamsimms/cloudberry/pulls).
-4. For large or architectural changes, open an issue first.
+2. Check [open issues](https://github.com/adamsimms/cloudberry/issues) and [open PRs](https://github.com/adamsimms/cloudberry/pulls).
+3. For large or architectural changes, open an issue first.
 
 ## Development setup
 

@@ -60,10 +60,6 @@ Historical field-network variables (Dataplicity, CamDo, etc.) are documented in 
 
 See `config.ini.example` for Pi camera settings (`awb_mode`, `exposure_mode`, `meter_mode`, `iso`, and image tuning).
 
-## Upgrading from v2 or piberry
-
-If you have an existing field rig on pre-v3.0 Cloudberry or the deprecated **piberry** fork, see **[docs/migration-v3.md](docs/migration-v3.md)** for step-by-step changes (secrets, CLI, systemd boot path, and directory layout).
-
 ## CLI
 
 ```bash
@@ -93,8 +89,8 @@ cloudberry --shutdown
 | `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
 | `examples/wittypi/` | WittyPi schedule scripts (`.wpi`) |
 | `scripts/` | WittyPi setup helper |
+| `assets/audio/` | Static audio assets |
 | `archive/shutter-island/` | Legacy Node.js rig + field tests |
-| `libraries/` | Low-power Arduino library artifact |
 | `systemd/` | Boot-once user service |
 
 ## Contributing
@@ -105,7 +101,6 @@ We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [
 |----------|---------|
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Dev setup, checks, PR expectations |
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting |
-| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
 | [docs/README.md](docs/README.md) | Documentation index |
 

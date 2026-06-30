@@ -54,6 +54,8 @@ Email remains supported for reporters who prefer not to use GitHub.
 
 ### Dependencies
 
+- Python **3.9+** required (`pyproject.toml`).
+- Install with `pip install -e ".[dev]"` locally or `pip install -e ".[pi]"` on a Pi.
 - Dependabot opens PRs for pip and GitHub Actions updates.
 - Review dependency updates before merging, especially on production Pis.
 

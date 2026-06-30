@@ -12,8 +12,9 @@ What does this PR change and why?
 
 ## Testing
 
-- [ ] `python -m ruff check .`
-- [ ] `python -m pytest`
+- [ ] `python3 -m ruff check .`
+- [ ] `python3 -m pytest`
+- [ ] `pre-commit run --all-files`
 - [ ] Tested on Raspberry Pi hardware (if camera/upload behavior changed)
 
 ## Checklist

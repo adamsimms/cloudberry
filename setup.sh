@@ -32,8 +32,7 @@ fi
 secure_files
 
 python3 -m venv "${cur_dir}/.venv"
-"${cur_dir}/.venv/bin/pip" install -r "${cur_dir}/requirements-pi.txt"
-"${cur_dir}/.venv/bin/pip" install -e "${cur_dir}"
+"${cur_dir}/.venv/bin/pip" install -e "${cur_dir}[pi]"
 
 install_systemd="${INSTALL_SYSTEMD:-ask}"
 if [[ "${install_systemd}" == "ask" ]]; then

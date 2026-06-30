@@ -34,3 +34,8 @@ contrast = 1.0
 sharpness = 1.0
 saturation = 1.0
 analogue_gain = 1.0
+# Named modes or libcamera enum integers (see cloudberry/camera.py)
+awb_mode = auto
+exposure_mode = normal
+meter_mode = average
+iso = 100

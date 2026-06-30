@@ -8,7 +8,7 @@ Keep this file for migration and hardware reference — do not commit live crede
 
 | Network | Notes |
 |---------|--------|
-| `shutterisland` | GoPro HERO4 AP SSID (see `examples/wittypi/shutterisland.wpi`) |
+| `shutterisland` | GoPro HERO4 AP SSID (see `scripts/wittypi/shutterisland.wpi`) |
 | `CamDoBlink_*` | CamDo Blink controller AP |
 
 ## GoPro

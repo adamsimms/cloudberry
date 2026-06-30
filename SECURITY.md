@@ -39,7 +39,7 @@ We will acknowledge receipt and work on a fix as soon as possible. For credentia
 ### S3 access
 
 - Keep `make_public = false` unless you explicitly need public objects.
-- Many buckets disable ACLs; prefer bucket policies or pre-signed URLs (see README).
+- Many buckets disable ACLs; use bucket policies instead of object ACLs.
 - Review bucket policies and block public access settings in AWS.
 
 ### Shutdown hook

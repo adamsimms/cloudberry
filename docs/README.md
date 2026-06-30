@@ -8,7 +8,7 @@
 | [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) | Contributors | Community standards |
 | [../CHANGELOG.md](../CHANGELOG.md) | Maintainers | Release notes |
 | [../LICENSE](../LICENSE) | Everyone | MIT license |
-| [field/](field/) | Field operators | Pinchard's Island hardware guides |
+| [migration-v3.md](migration-v3.md) | Field operators | Upgrade guide from v2 / piberry |
 | [field/secrets-reference.md](field/secrets-reference.md) | Field operators | Historical secrets (not loaded by app) |
 | [aws-iam-policy.json](aws-iam-policy.json) | Operators | Minimal S3 IAM policy |
 | [sudoers-cloudberry-shutdown](sudoers-cloudberry-shutdown) | Field operators | Passwordless shutdown for WittyPi |

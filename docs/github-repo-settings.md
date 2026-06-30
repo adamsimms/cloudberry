@@ -27,7 +27,7 @@ Confirm GitHub detects **MIT** from the `LICENSE` file (Settings → General →
 
 ## Security
 
-Enable **Private vulnerability reporting** (Settings → Code security → Private vulnerability reporting). The repo is public; see [SECURITY.md](../SECURITY.md).
+**Private vulnerability reporting** is enabled (Settings → Advanced Security). See [SECURITY.md](../SECURITY.md) for reporter instructions.
 
 ## Releases
 

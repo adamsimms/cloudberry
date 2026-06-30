@@ -9,7 +9,7 @@ Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — cap
 ## Boot-once workflow
 
 1. WittyPi powers the Pi on at the scheduled time
-2. `cloudberry` runs once (systemd or `scripts/gopro.sh`)
+2. `systemd/cloudberry.service` runs `cloudberry` once at boot
 3. Capture from GoPro or Pi camera, upload to S3
 4. Optional `shutdown_after` halts the Pi until the next wake-up
 
@@ -36,8 +36,6 @@ cloudberry --check-config
 cloudberry
 ```
 
-`python main.py` still works for migration but emits a deprecation warning — prefer the `cloudberry` command.
-
 ## Secrets (`secrets.env`)
 
 Never commit credentials. Copy `.env.example` → `secrets.env`:
@@ -60,7 +58,7 @@ Historical field-network variables (Dataplicity, CamDo, etc.) are documented in 
 | `general.shutdown_after` | Halt Pi after success |
 | `gopro.ip` | GoPro IP (default `10.5.5.9`) |
 
-See `config.ini.example` for Pi camera settings.
+See `config.ini.example` for Pi camera settings (`awb_mode`, `exposure_mode`, `meter_mode`, `iso`, and image tuning).
 
 ## CLI
 
@@ -75,37 +73,42 @@ cloudberry --shutdown
 
 | Step | Resource |
 |------|----------|
-| Install Python deps | `./setup.sh` |
+| Install Python deps + optional systemd | `./setup.sh` |
 | WittyPi + optional shutdown sudoers | `./scripts/wittypi-setup.sh` |
 | Boot-once schedule | Copy a `.wpi` from `examples/wittypi/` into WittyPi |
-| Systemd (recommended) | `systemd/cloudberry.service` |
-| Network-up hook (alternative) | `scripts/gopro.sh` — set `CLOUDBERRY_DIR` if not `/home/pi/cloudberry` |
+| Systemd service | `systemd/cloudberry.service` (installed by `setup.sh`) |
 | GoPro CSI firmware | `firmware/` |
 | Hardware PDFs and setup logs | [docs/field/](docs/field/) |
-
-`libraries/installWittyPi.sh` is a vendored copy of the UUGear installer; **`scripts/wittypi-setup.sh`** is the supported entry point.
 
 ## Repo layout
 
 | Path | Purpose |
 |------|---------|
 | `cloudberry/` | Python package (CLI, GoPro, Pi camera, S3) |
-| `docs/field/` | Field guides (WittyPi, INA219, watchdog, setup logs) |
+| `docs/` | Contributor docs, IAM policy, field guides |
 | `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
 | `examples/wittypi/` | WittyPi schedule scripts (`.wpi`) |
-| `scripts/` | `gopro.sh` boot launcher, `wittypi-setup.sh` |
+| `scripts/` | WittyPi setup helper |
 | `archive/shutter-island/` | Legacy Node.js rig + field tests |
-| `libraries/` | Vendored WittyPi installer, low-power library |
+| `libraries/` | Low-power Arduino library artifact |
 | `systemd/` | Boot-once user service |
 
-## Development
+## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md) — **hello@adamsimms.xyz**.
+We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [CONTRIBUTING.md](CONTRIBUTING.md), then open a PR against `master`.
+
+| Document | Purpose |
+|----------|---------|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Dev setup, checks, PR expectations |
+| [SECURITY.md](SECURITY.md) | Vulnerability reporting |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
+| [docs/README.md](docs/README.md) | Documentation index |
 
 ```bash
 pip install -e ".[dev]"
-python -m pytest
-python -m ruff check .
+python3 -m ruff check .
+python3 -m pytest
 pre-commit run --all-files
 ```
 

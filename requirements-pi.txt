@@ -1,2 +1,1 @@
--r requirements.txt
-picamera2>=0.3.0
+# Pi camera dependencies — install with: pip install -e ".[pi]"

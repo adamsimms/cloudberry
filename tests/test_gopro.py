@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from unittest.mock import MagicMock, patch
 
 from cloudberry.gopro import GoProCtrl, capture_from_gopro
@@ -57,3 +58,52 @@ def test_capture_from_gopro_skips_shoot_when_disabled(monkeypatch, tmp_path):
     gopro.take_photo.assert_not_called()
     assert len(files) == 1
     assert returned_gopro is gopro
+
+
+def test_download_fetches_media_from_gopro(monkeypatch, tmp_path):
+    monkeypatch.setattr("cloudberry.gopro.gopro_wifi_password", lambda: "pw")
+    monkeypatch.setattr(
+        "cloudberry.gopro.get_config",
+        lambda section, option, default=None: "10.5.5.9",
+    )
+
+    class FakeResponse:
+        def __init__(self, payload: bytes):
+            self._payload = payload
+
+        def read(self, size: int = -1) -> bytes:
+            if not self._payload:
+                return b""
+            if size < 0:
+                data, self._payload = self._payload, b""
+                return data
+            data, self._payload = self._payload[:size], self._payload[size:]
+            return data
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+    responses = iter(
+        [
+            FakeResponse(b'<a href="100GOPRO/">100GOPRO</a>'),
+            FakeResponse(b'<a href="GOPR0001.JPG">GOPR0001.JPG</a>'),
+            FakeResponse(b"fake-jpeg"),
+        ]
+    )
+
+    with patch("urllib.request.urlopen", side_effect=lambda *args, **kwargs: next(responses)):
+        with patch(
+            "cloudberry.gopro.parse_media_page",
+            return_value=[
+                {"name": "GOPR0001.JPG", "date": datetime(2024, 1, 1, tzinfo=timezone.utc)},
+            ],
+        ):
+            ctrl = GoProCtrl("H4")
+            downloaded = ctrl.download(tmp_path)
+
+    assert len(downloaded) == 1
+    assert downloaded[0][0].exists()
+    assert downloaded[0][1] == "GOPR0001.JPG"

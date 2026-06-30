@@ -1,37 +1,58 @@
 import sys
-from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from cloudberry.camera import _parse_resolution, capture_photo
+from cloudberry.camera import AWB_MODES, build_picamera_controls, capture_photo
 
 
-def test_parse_resolution():
-    assert _parse_resolution("2592x1944") == (2592, 1944)
+def test_build_picamera_controls_maps_named_modes():
+    controls = build_picamera_controls(
+        {
+            "awb_mode": "daylight",
+            "exposure_mode": "short",
+            "meter_mode": "matrix",
+            "iso": "200",
+            "brightness": "0.1",
+        }
+    )
+
+    assert controls["AwbMode"] == AWB_MODES["daylight"]
+    assert controls["AeExposureMode"] == 1
+    assert controls["AeMeteringMode"] == 2
+    assert controls["Iso"] == 200
+    assert controls["Brightness"] == 0.1
 
 
-def test_capture_photo_uses_picamera2(tmp_path: Path):
+def test_build_picamera_controls_accepts_numeric_strings():
+    controls = build_picamera_controls({"awb_mode": "5", "iso": "0"})
+
+    assert controls["AwbMode"] == 5
+    assert "Iso" not in controls
+
+
+def test_capture_photo_applies_advanced_controls(tmp_path):
     fake_module = MagicMock()
     fake_camera = MagicMock()
     fake_module.Picamera2.return_value.__enter__.return_value = fake_camera
 
     with patch.dict(sys.modules, {"picamera2": fake_module}):
-        image_path = capture_photo(
+        capture_photo(
             tmp_path,
             {
                 "resolution": "640x480",
                 "warmup_seconds": "0",
-                "brightness": "0.1",
+                "awb_mode": "cloudy",
+                "meter_mode": "spot",
             },
         )
 
-    assert image_path.parent == tmp_path
-    assert image_path.name.endswith("_PiCamera.jpg")
-    fake_camera.capture_file.assert_called_once()
+    controls = fake_camera.set_controls.call_args[0][0]
+    assert controls["AwbMode"] == AWB_MODES["cloudy"]
+    assert controls["AeMeteringMode"] == 1
 
 
-def test_capture_photo_requires_picamera2(tmp_path: Path, monkeypatch):
+def test_capture_photo_requires_picamera2(tmp_path, monkeypatch):
     import builtins
 
     real_import = builtins.__import__

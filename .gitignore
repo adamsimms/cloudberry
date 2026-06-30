@@ -1,10 +1,15 @@
-.idea/
+# Cloudberry
 images/
-note.txt
-*.secret
-*.DS_store
+logs/
 secrets.env
 .env
 .env.local
-cloudberry.ini
-~/cloudberry.ini
+config.ini
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.idea/

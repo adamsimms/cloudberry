@@ -1,0 +1,42 @@
+[project]
+name = "cloudberry"
+version = "3.0.0"
+description = "Raspberry Pi rig: GoPro and Pi camera capture with S3 upload for Pinchard's Island"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+    "boto3>=1.34.0",
+    "xmltodict>=0.13.0",
+    "wakeonlan>=3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/adamsimms/cloudberry"
+Repository = "https://github.com/adamsimms/cloudberry"
+Issues = "https://github.com/adamsimms/cloudberry/issues"
+Changelog = "https://github.com/adamsimms/cloudberry/blob/master/CHANGELOG.md"
+
+[project.optional-dependencies]
+pi = ["picamera2>=0.3.0"]
+dev = ["pytest>=7.0", "ruff>=0.4.0", "pre-commit>=3.0"]
+
+[project.scripts]
+cloudberry = "cloudberry.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["cloudberry*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

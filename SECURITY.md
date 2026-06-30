@@ -59,4 +59,3 @@ We will acknowledge receipt and work on a fix as soon as possible. For credentia
 
 - Cloudberry is designed for single-user, single-device field deployment — not multi-tenant or internet-exposed services.
 - Preflight checks validate connectivity but do not perform full security auditing.
-- Historical commits before v3.0.0 may have contained credentials in `config.ini` — rotate keys if unsure.

@@ -13,7 +13,6 @@
 | [field/secrets-reference.md](field/secrets-reference.md) | Field operators | Historical secrets (not loaded by app) |
 | [aws-iam-policy.json](aws-iam-policy.json) | Operators | Minimal S3 IAM policy |
 | [sudoers-cloudberry-shutdown](sudoers-cloudberry-shutdown) | Field operators | Passwordless shutdown for WittyPi |
-| [github-repo-settings.md](github-repo-settings.md) | Maintainers | GitHub About/topics/release checklist |
 
 ## Contributing to docs
 

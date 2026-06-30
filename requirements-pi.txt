@@ -1,1 +1,0 @@
-# Pi camera dependencies — install with: pip install -e ".[pi]"

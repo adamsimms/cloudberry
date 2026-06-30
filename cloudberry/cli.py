@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import subprocess
 import sys
 from pathlib import Path
 
@@ -29,7 +30,6 @@ from cloudberry.queue import (
 )
 from cloudberry.s3 import build_object_key, create_s3_client, push_picture_to_s3
 from cloudberry.secrets import load_secrets
-from cloudberry.shutdown import shutdown_system
 from cloudberry.validate import run_preflight_checks, validate_config
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -40,6 +40,29 @@ EXIT_CONFIG = 1
 EXIT_CAMERA = 2
 EXIT_UPLOAD = 3
 EXIT_PREFLIGHT = 4
+
+
+def shutdown_system(logger: logging.Logger | None = None) -> bool:
+    """Request an immediate system halt. Requires passwordless sudo for shutdown."""
+    log = logger or logging.getLogger("Cloudberry")
+    log.info("Requesting system shutdown")
+    try:
+        result = subprocess.run(
+            ["sudo", "shutdown", "-h", "now"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError as exc:
+        log.error("Failed to run shutdown command: %s", exc)
+        return False
+
+    if result.returncode != 0:
+        stderr = result.stderr.strip() or "unknown error"
+        log.error("Shutdown command failed (%s): %s", result.returncode, stderr)
+        return False
+
+    return True
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

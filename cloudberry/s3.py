@@ -26,20 +26,6 @@ def build_object_key(prefix: str | None, filename: str) -> str:
     return filename
 
 
-def generate_presigned_url(
-    s3_client,
-    bucket: str,
-    file_key: str,
-    *,
-    expires_in: int = 3600,
-) -> str:
-    return s3_client.generate_presigned_url(
-        "get_object",
-        Params={"Bucket": bucket, "Key": file_key},
-        ExpiresIn=expires_in,
-    )
-
-
 def push_picture_to_s3(
     s3_client,
     bucket: str,

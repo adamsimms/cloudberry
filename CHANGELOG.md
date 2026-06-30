@@ -9,6 +9,7 @@
 - Reorganize repo: `docs/field/`, `firmware/`, `scripts/`, `systemd/`
 - Add tests, CI, CONTRIBUTING, SECURITY, CODE_OF_CONDUCT
 - Supersedes the deprecated **piberry** repo (Pi Camera-only fork)
+- Post-modernization cleanup: docs index, trimmed secrets example, CI matrix, expanded tests, fixed WittyPi workflow path
 
 ## Prior history
 

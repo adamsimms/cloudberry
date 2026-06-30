@@ -34,7 +34,3 @@ contrast = 1.0
 sharpness = 1.0
 saturation = 1.0
 analogue_gain = 1.0
-awb_mode = auto
-exposure_mode = auto
-meter_mode = average
-iso = 100

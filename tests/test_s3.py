@@ -1,7 +1,31 @@
 from pathlib import Path
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
-from cloudberry.s3 import generate_presigned_url, push_picture_to_s3
+from cloudberry.s3 import (
+    build_object_key,
+    create_s3_client,
+    generate_presigned_url,
+    push_picture_to_s3,
+)
+
+
+def test_build_object_key_with_prefix():
+    assert build_object_key("pi-123", "photo.jpg") == "pi-123/photo.jpg"
+
+
+def test_build_object_key_without_prefix():
+    assert build_object_key("", "photo.jpg") == "photo.jpg"
+
+
+def test_create_s3_client_passes_region():
+    with patch("cloudberry.s3.boto3.client") as mock_client:
+        create_s3_client("key", "secret", "us-east-1")
+        mock_client.assert_called_once_with(
+            "s3",
+            aws_access_key_id="key",
+            aws_secret_access_key="secret",
+            region_name="us-east-1",
+        )
 
 
 def test_push_picture_to_s3_sets_content_type(tmp_path: Path):

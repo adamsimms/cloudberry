@@ -18,12 +18,11 @@ cp .env.example secrets.env
 cp config.ini.example config.ini
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt -r requirements-dev.txt
-pip install -e .
+pip install -e ".[dev]"
 pre-commit install
 ```
 
-On a Raspberry Pi: `pip install -r requirements-pi.txt`.
+On a Raspberry Pi: `pip install -e ".[pi]"`.
 
 ## Running checks
 

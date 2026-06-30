@@ -20,11 +20,11 @@ Email **hello@adamsimms.xyz** with:
 
 We will acknowledge receipt and work on a fix as soon as possible. For credential leaks, assume rotation is required immediately.
 
-### About GitHub private vulnerability reporting
+### GitHub private vulnerability reporting
 
-GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/working-with-repository-security-advisories/configuring-private-vulnerability-reporting-for-a-repository) is only available for **public** repositories. This repo is currently **private**, so that option does not appear in Settings — email is the correct channel.
+This is a **public** repository. You may also use GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/working-with-repository-security-advisories/configuring-private-vulnerability-reporting-for-a-repository) if enabled under **Settings → Code security → Private vulnerability reporting**.
 
-If the repository is made public in the future, enable it under **Settings → Security → Advanced Security → Private vulnerability reporting**, then update this file to mention both options.
+Email remains supported for reporters who prefer not to use GitHub.
 
 ## Security best practices for deployments
 

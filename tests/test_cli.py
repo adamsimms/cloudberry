@@ -8,7 +8,6 @@ def _ok_result():
 
 
 def test_check_config_reports_placeholder_errors(monkeypatch, tmp_path):
-    monkeypatch.setenv("PIBERRY_CONFIG", str(tmp_path / "missing.ini"))
     monkeypatch.setattr("cloudberry.cli.ensure_config", lambda: tmp_path / "config.ini")
     monkeypatch.setattr(
         "cloudberry.cli.validate_config",

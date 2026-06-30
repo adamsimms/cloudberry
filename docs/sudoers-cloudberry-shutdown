@@ -1,4 +1,4 @@
-# Allow the Pi user to shut down after a successful PiBerry run (WittyPi boot-once).
+# Allow the Pi user to shut down after a successful Cloudberry run (WittyPi boot-once).
 # Install with:
 #   sudo cp docs/sudoers-cloudberry-shutdown /etc/sudoers.d/cloudberry-shutdown
 #   sudo chmod 440 /etc/sudoers.d/cloudberry-shutdown

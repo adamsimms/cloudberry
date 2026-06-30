@@ -1,0 +1,41 @@
+[general]
+title = Cloudberry Controller
+
+# Camera type: H3, H4 (GoPro), or picamera (Pi camera module)
+camera_type = H4
+
+# For GoPro: take a new photo before downloading existing media
+take_photo = false
+
+# Delay in minutes before capture and upload (boot-once workflow)
+delay = 1
+
+# Optional S3 key prefix (defaults to Pi serial number)
+s3_key_prefix =
+
+# Log directory (default: <repo>/logs)
+log_dir =
+
+# Shut down Pi after successful run (WittyPi; requires sudoers — see docs/)
+shutdown_after = false
+
+# Make S3 objects public (many buckets disable ACLs — prefer false)
+make_public = false
+
+[gopro]
+ip = 10.5.5.9
+
+[picamera]
+resolution = 2592x1944
+warmup_seconds = 2
+jpeg_quality = 95
+brightness = 0.0
+contrast = 1.0
+sharpness = 1.0
+saturation = 1.0
+analogue_gain = 1.0
+# Named modes or libcamera enum integers (see cloudberry/camera.py)
+awb_mode = auto
+exposure_mode = normal
+meter_mode = average
+iso = 100

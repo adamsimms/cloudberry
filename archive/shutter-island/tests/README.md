@@ -28,11 +28,11 @@ cd cloudpistill && npm install && node snapshot.js
 
 ## helloaws/
 
-**S3 upload pipeline** — the missing link between the Pi and [pinchards.is](http://www.pinchards.is). Mostly commented-out pseudocode (`upload.js`); never shipped. Python `main.py` in cloudberry root eventually did this with boto.
+**S3 upload pipeline** — the missing link between the Pi and [pinchards.is](http://www.pinchards.is). Mostly commented-out pseudocode (`upload.js`); never shipped. The `cloudberry` CLI in the cloudberry repo eventually did this with boto3.
 
 ## hellowatchdog/
 
-**Dual WatchDog timer board** (SwitchDoc) — Arduino sketch to pat the hardware watchdog so a frozen Pi gets power-cycled. See `Documentation/DualWatchDog_110216-V2.02.pdf` in repo root.
+**Dual WatchDog timer board** (SwitchDoc) — Arduino sketch to pat the hardware watchdog so a frozen Pi gets power-cycled. See `docs/field/DualWatchDog_110216-V2.02.pdf` in the cloudberry repo.
 
 ## cron/
 

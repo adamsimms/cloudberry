@@ -1,126 +1,125 @@
-# GoPro Camera Controller
+# Cloudberry
 
-Raspberry Pi software for Pinchard's Island — captures GoPro photos, uploads to S3, displayed at [www.pinchards.is](http://www.pinchards.is).
+Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — captures photos from a **GoPro HERO3/HERO4** or **Pi camera module**, uploads to S3, and powers down. Designed for WittyPi boot-once deployments.
 
-_Supports H3 and H4_
+[![CI](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml/badge.svg)](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml)
 
-> **Note:** This repo supersedes the legacy private [shutter-island](https://github.com/adamsimms/shutter-island) Node.js experiments. Hardware docs, Witty Pi schedules, and archived Node scripts were merged from shutter-island in 2026. See `archive/shutter-island/` for rig code and field tests.
+> Supersedes the legacy [shutter-island](https://github.com/adamsimms/shutter-island) Node experiments and the deprecated **piberry** repo (Pi Camera-only fork). See `archive/shutter-island/` for 2017 rig history.
+
+## Boot-once workflow
+
+1. WittyPi powers the Pi on at the scheduled time
+2. `systemd/cloudberry.service` runs `cloudberry` once at boot
+3. Capture from GoPro or Pi camera, upload to S3
+4. Optional `shutdown_after` halts the Pi until the next wake-up
+
+## Camera modes
+
+| `camera_type` | Hardware |
+|---------------|----------|
+| `H4` | GoPro HERO4 over Wi‑Fi (default for Pinchard's Island) |
+| `H3` | GoPro HERO3 over Wi‑Fi |
+| `picamera` | Official Raspberry Pi camera module (`picamera2`) |
+
+## Quick start
+
+```bash
+git clone https://github.com/adamsimms/cloudberry.git
+cd cloudberry
+cp .env.example secrets.env
+cp config.ini.example config.ini
+chmod 600 secrets.env config.ini
+# Edit secrets.env and config.ini
+
+./setup.sh
+cloudberry --check-config
+cloudberry
+```
+
+## Secrets (`secrets.env`)
+
+Never commit credentials. Copy `.env.example` → `secrets.env`:
+
+- `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET`
+- `GOPRO_WIFI_PASSWORD` (required for H3/H4)
+- `GOPRO_MAC_ADDRESS` (for H4 wake-on-LAN)
+
+Also supported: `~/.cloudberry/secrets.env` or `CLOUDBERRY_SECRETS_FILE`.
+
+Historical field-network variables (Dataplicity, CamDo, etc.) are documented in [docs/field/secrets-reference.md](docs/field/secrets-reference.md) but are **not** loaded by the app.
+
+## Configuration (`config.ini`)
+
+| Key | Description |
+|-----|-------------|
+| `general.camera_type` | `H3`, `H4`, or `picamera` |
+| `general.take_photo` | GoPro: shoot before downloading (`true`/`false`) |
+| `general.delay` | Minutes to wait before capture |
+| `general.shutdown_after` | Halt Pi after success |
+| `gopro.ip` | GoPro IP (default `10.5.5.9`) |
+
+See `config.ini.example` for Pi camera settings (`awb_mode`, `exposure_mode`, `meter_mode`, `iso`, and image tuning).
+
+## Upgrading from v2 or piberry
+
+If you have an existing field rig on pre-v3.0 Cloudberry or the deprecated **piberry** fork, see **[docs/migration-v3.md](docs/migration-v3.md)** for step-by-step changes (secrets, CLI, systemd boot path, and directory layout).
+
+## CLI
+
+```bash
+cloudberry --check-config
+cloudberry --dry-run
+cloudberry --retry-failed
+cloudberry --shutdown
+```
+
+## Field deployment
+
+| Step | Resource |
+|------|----------|
+| Install Python deps + optional systemd | `./setup.sh` |
+| WittyPi + optional shutdown sudoers | `./scripts/wittypi-setup.sh` |
+| Boot-once schedule | Copy a `.wpi` from `examples/wittypi/` into WittyPi |
+| Systemd service | `systemd/cloudberry.service` (installed by `setup.sh`) |
+| GoPro CSI firmware | `firmware/` |
+| Hardware PDFs and setup logs | [docs/field/](docs/field/) |
 
 ## Repo layout
 
 | Path | Purpose |
 |------|---------|
-| `main.py`, `config.ini`, `utils/` | Python GoPro controller (run on the Pi) |
-| `Firmware/` | GoPro HERO4 official + CamDo CSI firmware and `autoexec.csi` scripts |
-| `Documentation/` | Field guides (Witty Pi, INA219, watchdog, setup log) |
-| `examples/wittypi/` | Witty Pi 2 schedule scripts (`.wpi`), including `shutterisland.wpi` |
-| `libraries/` | `installWittyPi.sh`, Low-Power library zip |
-| `script/` | `gopro.sh` auto-start, ffmpeg install |
-| `archive/shutter-island/` | Legacy Node.js rig code + field tests (2017 history) |
+| `cloudberry/` | Python package (CLI, GoPro, Pi camera, S3) |
+| `docs/` | Contributor docs, IAM policy, field guides |
+| `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
+| `examples/wittypi/` | WittyPi schedule scripts (`.wpi`) |
+| `scripts/` | WittyPi setup helper |
+| `archive/shutter-island/` | Legacy Node.js rig + field tests |
+| `libraries/` | Low-power Arduino library artifact |
+| `systemd/` | Boot-once user service |
 
-## Secrets (never commit)
+## Contributing
 
-AWS keys, GoPro Wi‑Fi password, and other credentials live in **`secrets.env`** (gitignored), not in `config.ini`.
+We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [CONTRIBUTING.md](CONTRIBUTING.md), then open a PR against `master`.
 
-1. Copy the template: `cp .env.example secrets.env`
-2. Fill in values (keep a backup in your password manager)
-3. On the Pi you can also use `~/.cloudberry/secrets.env`
+| Document | Purpose |
+|----------|---------|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Dev setup, checks, PR expectations |
+| [SECURITY.md](SECURITY.md) | Vulnerability reporting |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
+| [docs/README.md](docs/README.md) | Documentation index |
 
-`main.py` loads `secrets.env` automatically via `utils/secrets.py`. Required variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET`, `GOPRO_WIFI_PASSWORD`.
+```bash
+pip install -e ".[dev]"
+python3 -m ruff check .
+python3 -m pytest
+pre-commit run --all-files
+```
 
-**If you ever had AWS keys in an old `config.ini`:** rotate them in IAM — purging git history does not invalidate exposed keys.
+On a Pi: `pip install -e ".[pi]"`.
 
-## Install dependencies
+## License
 
-    cd cloudberry
-    sudo pip install -r requirements.txt
+MIT — see [LICENSE](LICENSE).
 
-## Execute script
-
-Before executing, please make sure that the Raspberry Pi is connected to the GoPro Camera via wifi.
-
-    python3 main.py
-
-## Enable auto-starting
-
-    sudo cp gopro.sh /etc/network/if-up.d/
-    sudo chmod 755 /etc/network/if-up.d/gopro.sh
-
-## GoPro
-Navigate via USB: `gphoto2://[usb:001,012]/DCIM/100GOPRO`
-
-GoPro4 Wifi Commands, with pairing instruction: 
-    https://github.com/KonradIT/goprowifihack/blob/master/HERO4/WifiCommands.md
-
-## WittyPi2
-
-Install:
-
-    wget http://www.uugear.com/repo/WittyPi2/installWittyPi.sh
-    sudo sh installWittyPi.sh
-
-Run:
-
-    cd ~/wittyPi && sudo ./wittyPi.sh
-
-Schedule examples (including the island capture schedule) are in `examples/wittypi/`. Copy a `.wpi` file to `~/wittyPi/schedule.wpi` and run `sudo ./runScript`, or select one when running `wittyPi.sh`. See `examples/wittypi/README` for format details.
-
-## Real VNC
-
-- https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-setup
-- https://www.realvnc.com/en/docs/raspberry-pi.html#raspberry-pi-connect-cloud
-- https://www.raspberrypi.org/documentation/remote-access/vnc/
-
-Start VNC:
-
-    sudo systemctl stop vncserver-x11-serviced.service 
-    sudo systemctl start vncserver-x11-serviced.service && vncserver
-
-## CameraSuite
-
-Install:
-
-    sudo apt-get update
-    sudo apt-get upgrade
-  
-    sudo apt-get install openssl sqlite libts-0.0 libinput5 libgles2-mesa libstdc++$
-    libc6 libegl1-mesa libegl1-mesa-drivers libexpat1 libz1 libpng12-0 libevdev2 li$
-    libxdmcp6 libxau6 libfreetype6 libfontconfig1 libmtdev1 libudev1 libxkbcommon0 $
-    libx11-6 libx11-xcb1 libxext6 libts-0.0-0 libxcb1 libdbus-1.3
-
-    sudo apt-get install gstreamer1.0-omx libgstreamer1.0-dev libgstreamer-plugins-base1.0
-
-    mkdir ~/camerasuite && cd ~/camerasuite
-
-    wget http://www.camerasuite.org/dl/camerasuitepi.tar.gz
-    tar xfv camerasuitepi.tar.gz
-
-Run:
-    
-    cd camerasuite && ./camerasuite.sh -platform xcb
-
-## WiFi Scribbles
-
-List wlan0 status:
-
-    iwconfig
-
-Scan available WiFi Networks:
-
-    sudo iwlist wlan0 scan
-    sudo wpa_cli
-
-Wifi up and down:
-
-    sudo ifconfig wlan0 up
-    sudo ifconfig wlan0 down
-
-Edit and reconfigure wpa_supplicant.conf:
-
-    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-    sudo wpa_cli -i wlan0 reconfigure
-
-What's going on with wpa_supplicatant:
-    
-    sudo wpa_supplicant -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf -d
-    ps aux | grep wpa_supplicant
+Security: see [SECURITY.md](SECURITY.md) · Prior art: [shutter-island](https://github.com/adamsimms/shutter-island) · [piberry](https://github.com/adamsimms/piberry) (superseded)

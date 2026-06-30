@@ -2,7 +2,7 @@
 
 Node.js experiments for the Pinchard's Island camera rig (2017–2018), migrated from the private [shutter-island](https://github.com/adamsimms/shutter-island) repo.
 
-**Not maintained.** Canonical rig software is `main.py` in the [cloudberry](https://github.com/adamsimms/cloudberry) repo root. Gallery: [www.pinchards.is](http://www.pinchards.is).
+**Not maintained.** Canonical rig software is the `cloudberry` CLI in the [cloudberry](https://github.com/adamsimms/cloudberry) repo. Gallery: [www.pinchards.is](http://www.pinchards.is).
 
 ## Layout
 

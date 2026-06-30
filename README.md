@@ -4,8 +4,6 @@ Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — cap
 
 [![CI](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml/badge.svg)](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml)
 
-> Supersedes the legacy [shutter-island](https://github.com/adamsimms/shutter-island) Node experiments and the deprecated **piberry** repo (Pi Camera-only fork). See `archive/shutter-island/` for 2017 rig history.
-
 ## Boot-once workflow
 
 1. WittyPi powers the Pi on at the scheduled time
@@ -75,7 +73,7 @@ cloudberry --shutdown
 |------|----------|
 | Install Python deps + optional systemd | `./setup.sh` |
 | WittyPi + optional shutdown sudoers | `./scripts/wittypi-setup.sh` |
-| Boot-once schedule | Copy a `.wpi` from `examples/wittypi/` into WittyPi |
+| Boot-once schedule | Copy a `.wpi` from [scripts/wittypi/](scripts/wittypi/) into WittyPi |
 | Systemd service | `systemd/cloudberry.service` (installed by `setup.sh`) |
 | GoPro CSI firmware | `firmware/` |
 | Hardware PDFs and setup logs | [docs/field/](docs/field/) |
@@ -87,10 +85,9 @@ cloudberry --shutdown
 | `cloudberry/` | Python package (CLI, GoPro, Pi camera, S3) |
 | `docs/` | Contributor docs, IAM policy, field guides |
 | `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
-| `examples/wittypi/` | WittyPi schedule scripts (`.wpi`) |
-| `scripts/` | WittyPi setup helper |
+| `scripts/wittypi/` | WittyPi schedule scripts (`.wpi`) |
+| `scripts/wittypi-setup.sh` | WittyPi installer + optional shutdown sudoers |
 | `assets/audio/` | Static audio assets |
-| `archive/shutter-island/` | Legacy Node.js rig + field tests |
 | `systemd/` | Boot-once user service |
 
 ## Contributing
@@ -102,7 +99,6 @@ We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Dev setup, checks, PR expectations |
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
-| [docs/README.md](docs/README.md) | Documentation index |
 
 ```bash
 pip install -e ".[dev]"

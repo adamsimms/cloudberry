@@ -7,7 +7,7 @@ Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — cap
 ## Boot-once workflow
 
 1. WittyPi powers the Pi on at the scheduled time
-2. `systemd/cloudberry.service` runs `cloudberry` once at boot
+2. `scripts/systemd/cloudberry.service` runs `cloudberry` once at boot
 3. Capture from GoPro or Pi camera, upload to S3
 4. Optional `shutdown_after` halts the Pi until the next wake-up
 
@@ -74,7 +74,7 @@ cloudberry --shutdown
 | Install Python deps + optional systemd | `./setup.sh` |
 | WittyPi + optional shutdown sudoers | `./scripts/wittypi-setup.sh` |
 | Boot-once schedule | Copy a `.wpi` from [scripts/wittypi/](scripts/wittypi/) into WittyPi |
-| Systemd service | `systemd/cloudberry.service` (installed by `setup.sh`) |
+| Systemd service | `scripts/systemd/cloudberry.service` (installed by `setup.sh`) |
 | GoPro CSI firmware | `firmware/` |
 | Hardware PDFs and setup logs | [docs/field/](docs/field/) |
 
@@ -87,8 +87,8 @@ cloudberry --shutdown
 | `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
 | `scripts/wittypi/` | WittyPi schedule scripts (`.wpi`) |
 | `scripts/wittypi-setup.sh` | WittyPi installer + optional shutdown sudoers |
+| `scripts/systemd/` | Boot-once user service template |
 | `assets/audio/` | Static audio assets |
-| `systemd/` | Boot-once user service |
 
 ## Contributing
 

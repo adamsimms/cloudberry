@@ -11,7 +11,7 @@
 
 If you discover a security issue, please **do not** open a public GitHub issue.
 
-**Preferred:** use [GitHub private vulnerability reporting](https://github.com/adamsimms/cloudberry/security/advisories/new). On the repository, open the **Security** tab and click **Report a vulnerability**. Your report stays private until we publish an advisory.
+Use [GitHub private vulnerability reporting](https://github.com/adamsimms/cloudberry/security/advisories/new). On the repository, open the **Security** tab and click **Report a vulnerability**. Your report stays private until we publish an advisory.
 
 Include:
 
@@ -19,8 +19,6 @@ Include:
 - Steps to reproduce
 - Impact assessment (e.g. credential exposure, remote code execution)
 - Any suggested fix, if you have one
-
-**Alternative:** email **hello@adamsimms.xyz** with the same details if you prefer not to use GitHub.
 
 We will acknowledge receipt and work on a fix as soon as possible. For credential leaks, assume rotation is required immediately.
 

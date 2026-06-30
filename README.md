@@ -117,4 +117,4 @@ On a Pi: `pip install -e ".[pi]"`.
 
 MIT — see [LICENSE](LICENSE).
 
-Security: see [SECURITY.md](SECURITY.md) · Prior art: [shutter-island](https://github.com/adamsimms/shutter-island) · [piberry](https://github.com/adamsimms/piberry) (superseded)
+Security: see [SECURITY.md](SECURITY.md)

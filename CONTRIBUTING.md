@@ -93,7 +93,7 @@ Do **not** commit `secrets.env`, `config.ini`, credentials, or field photos.
 
 ## Security
 
-Do not open public issues for vulnerabilities. Email **hello@adamsimms.xyz** or use GitHub private vulnerability reporting — see [SECURITY.md](SECURITY.md).
+Do not open public issues for vulnerabilities. Use [GitHub private vulnerability reporting](https://github.com/adamsimms/cloudberry/security/advisories/new) — see [SECURITY.md](SECURITY.md).
 
 ## Versioning
 

@@ -1,12 +1,7 @@
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from cloudberry.s3 import (
-    build_object_key,
-    create_s3_client,
-    generate_presigned_url,
-    push_picture_to_s3,
-)
+from cloudberry.s3 import build_object_key, create_s3_client, push_picture_to_s3
 
 
 def test_build_object_key_with_prefix():
@@ -38,16 +33,6 @@ def test_push_picture_to_s3_sets_content_type(tmp_path: Path):
     assert uploaded is True
     _, kwargs = client.upload_file.call_args
     assert kwargs["ExtraArgs"]["ContentType"] == "image/jpeg"
-
-
-def test_generate_presigned_url():
-    client = MagicMock()
-    client.generate_presigned_url.return_value = "https://example.com/photo"
-
-    url = generate_presigned_url(client, "bucket", "prefix/photo.jpg")
-
-    assert url == "https://example.com/photo"
-    client.generate_presigned_url.assert_called_once()
 
 
 def test_push_picture_to_s3_retries_and_succeeds(tmp_path: Path):

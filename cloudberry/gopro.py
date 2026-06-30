@@ -10,17 +10,60 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+import xmltodict
 from wakeonlan import send_magic_packet
 
-from cloudberry.common import count_down, parse_media_page
+from cloudberry.common import count_down
 from cloudberry.config import get_bool_config, get_config
-from cloudberry.gopro_urls import H3, H4
 from cloudberry.secrets import gopro_mac_address, gopro_wifi_password
 
 logger = logging.getLogger("Cloudberry")
 
 DEFAULT_GOPRO_IP = "10.5.5.9"
 URL_MEDIA = ":8080/videos/DCIM/"
+
+H3_URLS = {
+    "gopro_on": "/bacpac/PW?t={0}&p=%01",
+    "gopro_off": "/bacpac/PW?t={0}&p=%00",
+    "shutter_on": "/bacpac/SH?t={0}&p=%01",
+    "shutter_off": "/bacpac/SH?t={0}&p=%00",
+    "mode_photo": "/camera/CM?t={0}&p=%01",
+    "delete_all": "/camera/DA?t={0}",
+    "delete_last": "/camera/DL?t={0}",
+    "set_date_time": "/camera/TM?t={0}&p=%",
+}
+
+H4_URLS = {
+    "gopro_off": "/gp/gpControl/command/system/sleep",
+    "shutter_on": "/gp/gpControl/command/shutter?p=1",
+    "shutter_off": "/gp/gpControl/command/shutter?p=0",
+    "mode_photo": "/gp/gpControl/command/mode?p=1",
+    "delete": "/gp/gpControl/command/storage/delete?p=/100GOPRO/{file}",
+    "delete_all": "/gp/gpControl/command/storage/delete/all",
+}
+
+
+def parse_media_page(content: bytes | str) -> list[dict]:
+    if isinstance(content, bytes):
+        content = content.decode("utf-8", errors="replace")
+    data = xmltodict.parse(content)
+    tr_list = data["html"]["body"]["div"]["div"]["table"]["tbody"]["tr"]
+    if not isinstance(tr_list, list):
+        tr_list = [tr_list]
+    images = []
+    for tr in tr_list:
+        entry: dict = {}
+        for td in tr["td"]:
+            if "a" in td:
+                link = td["a"]
+                entry["name"] = link["#text"] if isinstance(link, dict) else str(link)
+            elif "span" in td and not isinstance(td["span"], list):
+                span = td["span"]
+                text = span["#text"] if isinstance(span, dict) else str(span)
+                entry["date"] = datetime.strptime(text, "%d-%b-%Y %H:%M")
+        if entry.get("name") and (".JPG" in entry["name"] or ".MP4" in entry["name"]):
+            images.append(entry)
+    return sorted(images, key=lambda img: img["name"])
 
 
 def gopro_base_url() -> str:
@@ -32,7 +75,7 @@ class GoProCtrl:
     def __init__(self, camera_type: str):
         self.camera_type = camera_type.upper()
         self.password = gopro_wifi_password()
-        self.urls = H3 if self.camera_type == "H3" else H4
+        self.urls = H3_URLS if self.camera_type == "H3" else H4_URLS
 
     def _command_url(self, path: str) -> str:
         if self.camera_type == "H3":

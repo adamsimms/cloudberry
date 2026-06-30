@@ -7,6 +7,7 @@ from cloudberry.cli import (
     EXIT_PREFLIGHT,
     EXIT_UPLOAD,
     main,
+    shutdown_system,
     upload_file,
 )
 
@@ -196,3 +197,19 @@ def test_main_reports_upload_failures(monkeypatch, tmp_path):
     (tmp_path / "failed").mkdir(exist_ok=True)
 
     assert main(["--delay", "0", "--no-capture"]) == EXIT_UPLOAD
+
+
+def test_shutdown_system_success():
+    logger = MagicMock()
+    with patch("cloudberry.cli.subprocess.run") as run:
+        run.return_value = MagicMock(returncode=0)
+        assert shutdown_system(logger) is True
+    run.assert_called_once()
+
+
+def test_shutdown_system_failure():
+    logger = MagicMock()
+    with patch("cloudberry.cli.subprocess.run") as run:
+        run.return_value = MagicMock(returncode=1, stderr="permission denied")
+        assert shutdown_system(logger) is False
+    logger.error.assert_called_once()

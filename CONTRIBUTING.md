@@ -23,7 +23,7 @@ pip install -e ".[dev]"
 pre-commit install
 ```
 
-Dependencies are defined in `pyproject.toml`. The `requirements*.txt` files are pointers only — use the editable install above.
+Dependencies are defined in `pyproject.toml` — use the editable install above.
 
 On a Raspberry Pi with a camera module:
 
@@ -77,7 +77,7 @@ firmware/            # GoPro CSI firmware
 scripts/
   wittypi/           # WittyPi schedule scripts (.wpi)
   wittypi-setup.sh   # WittyPi installer
-systemd/             # boot-once user service template
+  systemd/           # boot-once user service template
 ```
 
 ## Pull requests

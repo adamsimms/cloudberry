@@ -43,7 +43,7 @@ fi
 if [[ "${install_systemd}" == "yes" ]]; then
   service_path="/home/${user}/.config/systemd/user/cloudberry.service"
   mkdir -p "$(dirname "${service_path}")"
-  sed "s|%h|/home/${user}|g" "${cur_dir}/systemd/cloudberry.service" > "${service_path}"
+  sed "s|%h|/home/${user}|g" "${cur_dir}/scripts/systemd/cloudberry.service" > "${service_path}"
   systemctl --user daemon-reload
   systemctl --user enable cloudberry.service
   echo "Installed ${service_path}"

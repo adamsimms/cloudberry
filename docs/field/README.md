@@ -17,4 +17,4 @@ Pinchard's Island rig reference material. Paths below are relative to this direc
 - [scripts/wittypi/](../../scripts/wittypi/) — WittyPi schedule scripts (`.wpi`)
 - [scripts/wittypi-setup.sh](../../scripts/wittypi-setup.sh) — WittyPi installer + optional shutdown sudoers
 - [firmware/](../../firmware/) — GoPro HERO4 official and CamDo CSI firmware
-- [systemd/cloudberry.service](../../systemd/cloudberry.service) — Boot-once systemd unit
+- [scripts/systemd/cloudberry.service](../../scripts/systemd/cloudberry.service) — Boot-once systemd unit

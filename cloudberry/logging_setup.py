@@ -1,5 +1,7 @@
 """Programmatic logging setup with absolute paths and rotation."""
 
+from __future__ import annotations
+
 import logging
 import sys
 from logging.handlers import RotatingFileHandler

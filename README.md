@@ -1,6 +1,6 @@
 # Cloudberry
 
-Raspberry Pi field rig for [Pinchard's Island](http://www.pinchards.is) — captures photos from a **GoPro HERO3/HERO4** or **Pi camera module**, uploads to S3, and powers down. Designed for WittyPi boot-once deployments.
+Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — captures photos from a **GoPro HERO3/HERO4** or **Pi camera module**, uploads to S3, and powers down. Designed for WittyPi boot-once deployments.
 
 [![CI](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml/badge.svg)](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml)
 
@@ -36,6 +36,8 @@ cloudberry --check-config
 cloudberry
 ```
 
+`python main.py` still works for migration but emits a deprecation warning — prefer the `cloudberry` command.
+
 ## Secrets (`secrets.env`)
 
 Never commit credentials. Copy `.env.example` → `secrets.env`:
@@ -45,6 +47,8 @@ Never commit credentials. Copy `.env.example` → `secrets.env`:
 - `GOPRO_MAC_ADDRESS` (for H4 wake-on-LAN)
 
 Also supported: `~/.cloudberry/secrets.env` or `CLOUDBERRY_SECRETS_FILE`.
+
+Historical field-network variables (Dataplicity, CamDo, etc.) are documented in [docs/field/secrets-reference.md](docs/field/secrets-reference.md) but are **not** loaded by the app.
 
 ## Configuration (`config.ini`)
 
@@ -67,6 +71,20 @@ cloudberry --retry-failed
 cloudberry --shutdown
 ```
 
+## Field deployment
+
+| Step | Resource |
+|------|----------|
+| Install Python deps | `./setup.sh` |
+| WittyPi + optional shutdown sudoers | `./scripts/wittypi-setup.sh` |
+| Boot-once schedule | Copy a `.wpi` from `examples/wittypi/` into WittyPi |
+| Systemd (recommended) | `systemd/cloudberry.service` |
+| Network-up hook (alternative) | `scripts/gopro.sh` — set `CLOUDBERRY_DIR` if not `/home/pi/cloudberry` |
+| GoPro CSI firmware | `firmware/` |
+| Hardware PDFs and setup logs | [docs/field/](docs/field/) |
+
+`libraries/installWittyPi.sh` is a vendored copy of the UUGear installer; **`scripts/wittypi-setup.sh`** is the supported entry point.
+
 ## Repo layout
 
 | Path | Purpose |
@@ -75,9 +93,9 @@ cloudberry --shutdown
 | `docs/field/` | Field guides (WittyPi, INA219, watchdog, setup logs) |
 | `firmware/` | GoPro HERO4 official + CamDo CSI firmware |
 | `examples/wittypi/` | WittyPi schedule scripts (`.wpi`) |
-| `scripts/` | `gopro.sh` auto-start, WittyPi setup helper |
+| `scripts/` | `gopro.sh` boot launcher, `wittypi-setup.sh` |
 | `archive/shutter-island/` | Legacy Node.js rig + field tests |
-| `libraries/` | WittyPi installer, low-power library |
+| `libraries/` | Vendored WittyPi installer, low-power library |
 | `systemd/` | Boot-once user service |
 
 ## Development
@@ -85,13 +103,16 @@ cloudberry --shutdown
 See [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md) — **hello@adamsimms.xyz**.
 
 ```bash
-pip install -r requirements.txt -r requirements-dev.txt
-pip install -e .
+pip install -e ".[dev]"
 python -m pytest
+python -m ruff check .
+pre-commit run --all-files
 ```
 
-On a Pi: `pip install -r requirements-pi.txt`.
+On a Pi: `pip install -e ".[pi]"`.
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+Contact: hello@adamsimms.xyz · Security: see [SECURITY.md](SECURITY.md) · Prior art: [shutter-island](https://github.com/adamsimms/shutter-island) · [piberry](https://github.com/adamsimms/piberry) (superseded)

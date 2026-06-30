@@ -60,4 +60,4 @@ def gopro_wifi_password() -> str:
 
 def gopro_mac_address() -> str:
     load_secrets()
-    return os.environ.get("GOPRO_MAC_ADDRESS", "D4:D9:19:9A:00:5A")
+    return os.environ.get("GOPRO_MAC_ADDRESS", "AA:BB:CC:DD:EE:FF")

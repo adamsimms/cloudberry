@@ -2,7 +2,9 @@ from unittest.mock import MagicMock, patch
 
 from cloudberry.validate import (
     ValidationResult,
+    check_gopro_reachable,
     check_network,
+    run_preflight_checks,
     validate_config,
     validate_resolution,
 )
@@ -45,3 +47,37 @@ def test_validation_result_ok():
 
     result.add_error("problem")
     assert not result.ok
+
+
+def test_run_preflight_checks_collects_errors(monkeypatch):
+    monkeypatch.setattr("cloudberry.validate.check_network", lambda: False)
+    monkeypatch.setattr("cloudberry.validate.get_camera_type", lambda: "H4")
+    monkeypatch.setattr(
+        "cloudberry.validate.check_gopro_reachable",
+        lambda: (False, "GoPro offline"),
+    )
+    monkeypatch.setattr("cloudberry.validate.get_aws_credentials", lambda: ("b", "k", "s"))
+    monkeypatch.setattr("cloudberry.validate.get_aws_region", lambda: "us-east-1")
+    monkeypatch.setattr(
+        "cloudberry.validate.check_s3_credentials",
+        lambda *args: (True, "ok"),
+    )
+
+    result = run_preflight_checks()
+
+    assert not result.ok
+    assert any("network" in error for error in result.errors)
+    assert any("GoPro offline" in error for error in result.errors)
+
+
+def test_check_gopro_reachable_success(monkeypatch):
+    monkeypatch.setattr(
+        "cloudberry.validate.get_config",
+        lambda section, option, default=None: "10.5.5.9",
+    )
+
+    with patch("socket.create_connection", return_value=MagicMock()):
+        ok, message = check_gopro_reachable()
+
+    assert ok
+    assert "10.5.5.9" in message

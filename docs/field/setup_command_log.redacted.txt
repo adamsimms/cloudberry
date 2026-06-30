@@ -1,8 +1,9 @@
 # Field setup log (redacted from shutter-island)
 # Passwords, tokens, and serial numbers removed before archival.
+# Paths updated for Cloudberry v3 layout (docs/field/).
 
 # Install WittyPi2 Software
-# See Documentation/WittyPi2_UserManual.pdf
+# See docs/field/WittyPi2_UserManual.pdf
 
 wget http://www.uugear.com/repo/WittyPi2/installWittyPi.sh
 sudo sh installWittyPi.sh

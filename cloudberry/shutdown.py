@@ -1,5 +1,7 @@
 """System shutdown helpers for boot-once WittyPi deployments."""
 
+from __future__ import annotations
+
 import logging
 import subprocess
 

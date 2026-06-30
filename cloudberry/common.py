@@ -1,5 +1,7 @@
 """Shared helpers for Cloudberry."""
 
+from __future__ import annotations
+
 import sys
 import time
 from datetime import datetime

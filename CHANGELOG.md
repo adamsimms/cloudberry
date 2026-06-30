@@ -10,9 +10,8 @@ All notable changes to this project are documented here.
 - Consolidate GoPro (H3/H4) and Pi Camera (`picamera`) into `cloudberry` package
 - Add CLI (`cloudberry`), preflight checks, upload queue, rotating logs, shutdown hook
 - Secrets via `secrets.env` only (see `.env.example`); config in `config.ini`
-- Reorganize repo: `docs/field/`, `firmware/`, `scripts/`, `systemd/`
-- Add tests, CI, CONTRIBUTING, SECURITY, CODE_OF_CONDUCT
-- Supersedes the deprecated **piberry** repo (Pi Camera-only fork)
+- Reorganize repo: `docs/field/`, `firmware/`, `scripts/`
+- Add tests, CI, CONTRIBUTING, SECURITY
 
 ### Cleanup and hardening
 

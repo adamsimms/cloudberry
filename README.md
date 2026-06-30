@@ -44,7 +44,7 @@ Never commit credentials. Copy `.env.example` → `secrets.env`:
 
 Also supported: `~/.cloudberry/secrets.env` or `CLOUDBERRY_SECRETS_FILE`.
 
-Historical field-network variables (Dataplicity, CamDo, etc.) are documented in [docs/field/secrets-reference.md](docs/field/secrets-reference.md) but are **not** loaded by the app.
+Island Wi‑Fi and GoPro field notes are in [docs/field/secrets-reference.md](docs/field/secrets-reference.md) but are **not** loaded by the app.
 
 ## Configuration (`config.ini`)
 

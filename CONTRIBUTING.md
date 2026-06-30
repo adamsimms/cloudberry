@@ -74,8 +74,9 @@ docs/
   field/             # island hardware guides (PDFs, setup logs)
   aws-iam-policy.json
 firmware/            # GoPro CSI firmware
-examples/wittypi/    # WittyPi schedule scripts
-archive/             # shutter-island history (read-only)
+scripts/
+  wittypi/           # WittyPi schedule scripts (.wpi)
+  wittypi-setup.sh   # WittyPi installer
 systemd/             # boot-once user service template
 ```
 

@@ -40,7 +40,8 @@ if [[ "${enable_shutdown}" == "yes" ]]; then
 fi
 
 echo
-echo "WittyPi installed. Configure schedules with:"
+echo "WittyPi installed. Example schedules: ${repo_root}/scripts/wittypi/"
+echo "Copy a .wpi file to ${witty_pi_dir}/schedule.wpi, or configure with:"
 echo "  cd ${witty_pi_dir} && sudo ./wittyPi.sh"
 echo
 echo "Cloudberry boot-once workflow:"

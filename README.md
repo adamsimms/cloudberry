@@ -60,6 +60,10 @@ Historical field-network variables (Dataplicity, CamDo, etc.) are documented in 
 
 See `config.ini.example` for Pi camera settings (`awb_mode`, `exposure_mode`, `meter_mode`, `iso`, and image tuning).
 
+## Upgrading from v2 or piberry
+
+If you have an existing field rig on pre-v3.0 Cloudberry or the deprecated **piberry** fork, see **[docs/migration-v3.md](docs/migration-v3.md)** for step-by-step changes (secrets, CLI, systemd boot path, and directory layout).
+
 ## CLI
 
 ```bash

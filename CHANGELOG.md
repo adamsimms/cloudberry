@@ -27,10 +27,15 @@ All notable changes to this project are documented here.
 
 ### Breaking changes
 
-- Entry point is **`cloudberry` only** (removed `python main.py`)
-- Boot path is **systemd** (removed `scripts/gopro.sh`)
-- Secrets in **`secrets.env`**, not `config.ini`
-- Directory layout: `docs/field/`, `firmware/`, `scripts/`, `systemd/`
+See **[docs/migration-v3.md](docs/migration-v3.md)** for the full field upgrade guide. Summary:
+
+| Before (v2 / piberry) | After (v3) |
+|-----------------------|------------|
+| `python main.py` | `cloudberry` |
+| `scripts/gopro.sh` network hook | `systemd/cloudberry.service` |
+| Secrets in `config.ini` | Secrets in `secrets.env` |
+| `Documentation/`, `Firmware/`, `script/` | `docs/field/`, `firmware/`, `scripts/` |
+| `utils/`, `urls_H3.py`, `urls_H4.py` | `cloudberry/` package |
 
 ## Prior history
 

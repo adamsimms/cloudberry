@@ -22,9 +22,7 @@ We will acknowledge receipt and work on a fix as soon as possible. For credentia
 
 ### GitHub private vulnerability reporting
 
-This is a **public** repository. You may also use GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/working-with-repository-security-advisories/configuring-private-vulnerability-reporting-for-a-repository) if enabled under **Settings → Code security → Private vulnerability reporting**.
-
-Email remains supported for reporters who prefer not to use GitHub.
+This is a **public** repository with [private vulnerability reporting](https://github.com/adamsimms/cloudberry/security/advisories/new) **enabled**. Use the **Report a vulnerability** button on the repository Security tab, or email **hello@adamsimms.xyz** if you prefer not to use GitHub.
 
 ## Security best practices for deployments
 

@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: Cloudberry
+version: 3.0.0
+authors:
+  - family-names: Simms
+    given-names: Adam
+    email: hello@adamsimms.xyz
+license: MIT
+repository-code: "https://github.com/adamsimms/cloudberry"
+url: "https://github.com/adamsimms/cloudberry"
+abstract: >-
+  Raspberry Pi rig: GoPro and Pi camera capture with S3 upload for
+  Pinchard's Island.
+keywords:
+  - raspberry-pi
+  - gopro
+  - s3
+  - field-capture
+  - wittypi

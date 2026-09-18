@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## Unreleased
+
+- Add scrubbed WittyPi schedule and field logs from the 2017 `cabinberry` SD clone under `docs/field/cabinberry-card/` (no secrets, no 2026-09-18 boot).
+
 ## 3.0.0
 
 ### Modernization

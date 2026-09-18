@@ -7,6 +7,7 @@ Pinchard's Island rig reference material. Paths below are relative to this direc
 | [WittyPi2_UserManual.pdf](WittyPi2_UserManual.pdf) | UUGear WittyPi 2 user manual (vendored; refreshed monthly by CI) |
 | [ina219.pdf](ina219.pdf) | INA219 current sensor notes |
 | [secrets-reference.md](secrets-reference.md) | Island Wi‑Fi and GoPro field notes (not loaded by app) |
+| [cabinberry-card/](cabinberry-card/) | Scrubbed WittyPi and gopro logs from the 2017 Pi SD clone |
 
 ## Related repo paths
 

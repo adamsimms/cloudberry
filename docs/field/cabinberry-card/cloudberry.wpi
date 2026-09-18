@@ -1,0 +1,32 @@
+# Turn on Raspberry Pi at 8:00 for 15 minutes each hour until 20:15.
+# Turn off at 20:15 for 11 hours 45 minutes (until next day.)
+# Repeat above everyday
+
+BEGIN	2015-08-01 08:00:00	# start at 8:00
+END	2025-07-31 23:59:59
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   M45
+ON    M15
+OFF   H11 M45

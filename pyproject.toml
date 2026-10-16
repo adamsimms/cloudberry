@@ -15,7 +15,7 @@ dependencies = [
 Homepage = "https://github.com/adamsimms/cloudberry"
 Repository = "https://github.com/adamsimms/cloudberry"
 Issues = "https://github.com/adamsimms/cloudberry/issues"
-Changelog = "https://github.com/adamsimms/cloudberry/blob/master/CHANGELOG.md"
+Changelog = "https://github.com/adamsimms/cloudberry/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 pi = ["picamera2>=0.3.0"]

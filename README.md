@@ -101,7 +101,7 @@ cloudberry --shutdown
 
 ## Contributing
 
-We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [CONTRIBUTING.md](CONTRIBUTING.md), then open a PR against `master`.
+We welcome bug fixes, docs improvements, and rig-hardening changes. Start with [CONTRIBUTING.md](CONTRIBUTING.md), then open a PR against `main`.
 
 | Document | Purpose |
 |----------|---------|

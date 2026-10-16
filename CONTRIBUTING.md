@@ -82,7 +82,7 @@ scripts/
 
 ## Pull requests
 
-1. Fork and branch from `master`.
+1. Fork and branch from `main`.
 2. Keep changes focused — match existing style and naming.
 3. Update `CHANGELOG.md` for user-visible changes.
 4. Update `README.md` and `config.ini.example` if config or CLI behavior changes.
@@ -98,7 +98,7 @@ Do not open public issues for vulnerabilities. Use [GitHub private vulnerability
 ## Versioning
 
 - Version lives in `pyproject.toml` and `cloudberry/__init__.py`.
-- Tag releases as `vX.Y.Z` on `master` after merge.
+- Tag releases as `vX.Y.Z` on `main` after merge.
 - Document breaking changes clearly in `CHANGELOG.md`.
 
 ## Questions

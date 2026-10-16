@@ -1,6 +1,6 @@
 # Cloudberry
 
-Raspberry Pi field rig for [Pinchard's Island](https://www.pinchards.is) — captures photos from a **GoPro HERO3/HERO4** or **Pi camera module**, uploads to S3, and powers down. Designed for WittyPi boot-once deployments.
+Raspberry Pi field rig for [Pinchard's Island](https://art.adamsimms.xyz/cloudberry/archive/) — captures photos from a **GoPro HERO3/HERO4** or **Pi camera module**, uploads to S3, and powers down. Designed for WittyPi boot-once deployments.
 
 [![CI](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml/badge.svg)](https://github.com/adamsimms/cloudberry/actions/workflows/ci.yml)
 

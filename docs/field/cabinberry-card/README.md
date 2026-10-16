@@ -26,7 +26,7 @@ A 2019-12-23 studio session remains in the logs and is not the 2017-18 field run
 
 The Pi kept its hourly wake through the public catalog's 33-day silence (14 Nov-16 Dec 2017). From 1 Dec 2017 the GoPro path is mostly `HTTP 410 Gone` and `urlopen timed out`. That is a camera or camera-connection failure, not a dead Pi.
 
-This card ran `camera_type H3`, `take_photo True`, bucket `shutter-island-test`. Local leftover names are `GOPR0380`-`GOPR0394`. That is not the public Hero4 series `GOPR1957`-`GOPR4132`. Do not cite these GOPR numbers as pinchards.is frames.
+This card ran `camera_type H3`, `take_photo True`, bucket `shutter-island-test`. Local leftover names are `GOPR0380`-`GOPR0394`. That is not the public Hero4 series `GOPR1957`-`GOPR4132`. Do not cite these GOPR numbers as Cloudberry archive frames.
 
 ## Clone (not in git)
 
